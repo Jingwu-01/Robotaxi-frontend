@@ -7,7 +7,7 @@ export default function Contact() {
           </h1>
       </div>
 
-      <div className="flex flex-col mb-10 bg-gray-800 shadow-sm rounded-xl px-5 py-4 ">
+      <div className="flex flex-col mb-10 bg-gray-800 shadow-sm rounded-xl px-5 py-4">
         <div> 
         <p className="text-lg font-semibold text-gray-100 mb-2">Developers:</p>
         <p className="text-md font-semibold text-gray-100 mb-2">
