@@ -1,8 +1,8 @@
-import Background from "@/components/background";
-import Video from "@/components/video";
-import Features from "@/components/features";
-import JoinUs from "@/components/join-us";
-import Footer from "@/components/footer";
+import Background from "@/components/landing_page_components/background";
+import Video from "@/components/landing_page_components/video";
+import Features from "@/components/landing_page_components/features";
+import JoinUs from "@/components/landing_page_components/join-us";
+import Footer from "@/components/landing_page_components/footer";
 
 export default function Home() {
   return (
