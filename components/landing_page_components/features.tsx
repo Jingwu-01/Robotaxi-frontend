@@ -17,6 +17,7 @@ export default function Features() {
           alt="Blurred shape"
         />
       </div>
+
       <div
         className="pointer-events-none absolute bottom-0 left-1/2 -z-10 -mb-80 -translate-x-[120%] opacity-50"
         aria-hidden="true"
@@ -29,6 +30,7 @@ export default function Features() {
           alt="Blurred shape"
         />
       </div>
+      
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,theme(colors.slate.400/.25),transparent)1] md:py-20">
           {/* Section header */}
