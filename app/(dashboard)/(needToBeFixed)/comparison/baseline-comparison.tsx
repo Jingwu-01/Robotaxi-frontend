@@ -2,11 +2,9 @@
 
 import LineChart03 from '@/components/charts/line-chart-03'
 import { chartAreaGradient } from '@/components/charts/chartjs-config'
-
-// Import utilities
 import { tailwindConfig, hexToRGB } from '@/components/utils/utils'
 
-export default function Comparison() {
+export default function BaselineComparison() {
 
   const energyData = {
     labels: [
