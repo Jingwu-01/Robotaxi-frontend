@@ -77,6 +77,7 @@ export default function SignUp() {
 
         <div className="max-w-sm mx-auto">
           <form onSubmit={handleSubmit}>
+
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
@@ -84,13 +85,9 @@ export default function SignUp() {
               >
                 City <span className="text-red-600">*</span>
               </label>
-              <input
-                id="city"
-                type="text"
-                className="form-input w-full text-gray-300"
-                placeholder="Currently we only support Houston"
-                required
-              />
+              <select id="city" className="form-select w-full">
+                <option>Houston</option>
+              </select>
             </div>
 
             <div className="mb-5">
