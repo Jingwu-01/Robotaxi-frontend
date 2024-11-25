@@ -102,7 +102,7 @@ export default function DashboardCard_Vehicles() {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 bg-gray-800 shadow-sm rounded-xl">
       <header className="px-5 py-4 border-gray-700/60 flex items-center">
-        <h2 className="font-semibold text-gray-100">Active Vehicles</h2>
+        <h2 className="font-semibold text-gray-100">Active Taxis</h2>
       </header>
       <RealtimeChart data={chartData} width={595} height={248} />
     </div>

@@ -1,24 +1,19 @@
-import DashboardCardProfit from './dashboard-card-profit'
-import DashboardCardRevenue from './dashboard-card-revenue'
-import DashboardCardCost from './dashboard-card-cost'
-import DashboardCardElec from './dashboard-card-elec'
-import DashboardCardPassenger from './dashboard-card-passenger'
-import DashboardCardCharger from './dashboard-card-charger'
-import DashboardCardVehicle from  './dashboard-card-vehicle'
+import DashboardCardProfit from "./dashboard-card-profit";
+import DashboardCardRevenue from "./dashboard-card-revenue";
+import DashboardCardCost from "./dashboard-card-cost";
+import DashboardCardElec from "./dashboard-card-elec";
+import DashboardCardPassenger from "./dashboard-card-passenger";
+import DashboardCardCharger from "./dashboard-card-charger";
+import DashboardCardVehicle from "./dashboard-card-vehicle";
 
 export default function Dashboard() {
   return (
     <div className="px-8 py-8 w-full max-w-[96rem] mx-auto">
-     
       <div className="flex justify-between items-center mb-8">
-        {/* Left: Title */}
-        <div className="mb-0">
           <h1 className="text-3xl text-gray-100 font-bold">Dashboard</h1>
-        </div>
       </div>
 
-      {/* Cards */}
-      <div className="grid grid-cols-12 gap-6">
+      <div className="grid grid-cols-12 gap-5">
         <DashboardCardProfit />
         <DashboardCardRevenue />
         <DashboardCardCost />
@@ -27,7 +22,7 @@ export default function Dashboard() {
         <DashboardCardCharger />
         <DashboardCardPassenger />
         <DashboardCardVehicle />
-      </div>      
+      </div>
     </div>
-  )
+  );
 }

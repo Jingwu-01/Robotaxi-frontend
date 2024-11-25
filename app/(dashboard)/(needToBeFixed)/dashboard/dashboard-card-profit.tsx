@@ -1,13 +1,10 @@
 'use client'
 
-import EditMenu from '@/components/edit-menu'
 import LineChart01 from '@/components/charts/line-chart-01'
 import { chartAreaGradient } from '@/components/charts/chartjs-config'
-
-// Import utilities
 import { tailwindConfig, hexToRGB } from '@/components/utils/utils'
 
-export default function DashboardCard01() {
+export default function DashboardCard_Profit() {
 
   const chartData = {
     labels: [
@@ -22,7 +19,6 @@ export default function DashboardCard01() {
       '12-01-2024', '01-01-2025',
     ],
     datasets: [
-      // Indigo line
       {
         data: [
           500, 600, 400,  500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400,
@@ -52,20 +48,18 @@ export default function DashboardCard01() {
   }
 
   return(
-    <div className="flex flex-col col-span-full sm:col-span-6 xl:col-span-4 bg-white dark:bg-gray-800 shadow-sm rounded-xl">
+    <div className="flex flex-col col-span-4 bg-gray-800 shadow-sm rounded-xl">
       <div className="px-5 pt-5">
         <header className="flex justify-between items-start mb-2">
-          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-2">Profit</h2>
+          <h2 className="text-lg font-semibold text-gray-100 mb-2">Profit</h2>
 
         </header>
         <div className="flex items-start">
-          <div className="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2">$10,000</div>
+          <div className="text-3xl font-bold text-gray-100 mr-2">$10,000</div>
           <div className="text-sm font-medium text-green-700 px-1.5 bg-green-500/20 rounded-full">+1%</div>
         </div>
       </div>
-      {/* Chart built with Chart.js 3 */}
       <div className="grow max-sm:max-h-[128px] xl:max-h-[128px]">
-        {/* Change the height attribute to adjust the chart height */}
         <LineChart01 data={chartData} width={389} height={128} />
       </div>
     </div>
