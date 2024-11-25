@@ -48,18 +48,15 @@ export default function GPT() {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-[96rem] mx-auto">
-      <div className="sm:flex sm:justify-between sm:items-center mb-8">
-        <div className="mb-4 sm:mb-0">
-          <h1 className="text-2xl md:text-3xl dark:text-gray-100 font-bold">
+    <div className="px-8 py-8 w-full max-w-[96rem] mx-auto">
+      <div className="mb-8">
+          <h1 className="text-3xl text-gray-100 font-bold">
             Robotaxi GPT
           </h1>
-        </div>
       </div>
 
       <div className="grid grid-cols-12 gap-6">
-        <div className="col-span-12">
-          <div className="bg-white dark:bg-gray-800 shadow rounded-lg p-6">
+          <div className="bg-gray-800 shadow rounded-lg p-6 col-span-12">
             <form onSubmit={handleSubmit} className="flex flex-col">
               <textarea
                 id="chatbox"
@@ -67,7 +64,7 @@ export default function GPT() {
                 placeholder="Ask a question to Robotaxi GPT."
                 value={message}
                 onChange={handleChange}
-                className="p-3 border border-gray-300 dark:border-gray-600 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white"
+                className="p-3 border border-gray-600 rounded-md mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-700 text-white"
                 required
                 rows={3}
               />
@@ -82,10 +79,10 @@ export default function GPT() {
               </div>
             </form>
 
-            <div className="mt-6">
+            <div>
               {error && <div className="text-red-500">{error}</div>}
               {response && (
-                <div className="p-4 dark:text-gray-100 rounded-md">
+                <div className="p-4 text-gray-100 rounded-md">
                   {response}
                 </div>
               )}
@@ -93,6 +90,5 @@ export default function GPT() {
           </div>
         </div>
       </div>
-    </div>
   );
 }
