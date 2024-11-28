@@ -2,6 +2,7 @@
 
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
+import Tooltip from "@/components/tooltip";
 
 export default function Init() {
   const [formData, setFormData] = useState({
@@ -72,7 +73,9 @@ export default function Init() {
       <div className="pt-20 pb-10">
         <div className="text-center pb-10">
           <h1 className="text-md text-gray-100 ">Welcome.</h1>
-          <h1 className="text-md text-gray-100 ">We exist to make robotaxi charging easier.</h1>
+          <h1 className="text-md text-gray-100 ">
+            We exist to make robotaxi charging easier.
+          </h1>
         </div>
 
         <div className="max-w-sm mx-auto">
@@ -91,6 +94,7 @@ export default function Init() {
             </div>
 
             <div className="mb-5">
+            <div className="flex items-center">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
                 htmlFor="simulationTime"
@@ -98,6 +102,14 @@ export default function Init() {
                 Simulation Time (seconds){" "}
                 <span className="text-red-600">*</span>
               </label>
+
+              <Tooltip size="md" bg="dark" className="ml-1 relative transform -translate-y-0.5">
+                <div className="text-xs text-gray-100">
+                Specifies the total duration for which the simulation will run, measured in the simulator's time.
+                </div>
+              </Tooltip>
+            
+            </div>
               <input
                 id="simulationTime"
                 name="simulationTime"
@@ -131,12 +143,21 @@ export default function Init() {
               </div> */}
 
             <div className="mb-5">
+            <div className="flex items-center">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
                 htmlFor="timeStep"
               >
                 Time Step (seconds) <span className="text-red-600">*</span>
               </label>
+
+              <Tooltip size="md" bg="dark" className="ml-1 relative transform -translate-y-0.5">
+                <div className="text-xs text-gray-100">
+                  Time step is the smallest discrete interval of simulated time. A smaller time step will result in a more accurate simulation but will demand more computational resources.
+                </div>
+              </Tooltip>
+              </div>  
+
               <input
                 id="timeStep"
                 name="timeStep"
