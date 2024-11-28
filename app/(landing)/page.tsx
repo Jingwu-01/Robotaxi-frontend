@@ -1,9 +1,9 @@
-import Background from "@/components/landing_page_components/background";
-import Title from "@/components/landing_page_components/title";
-import Features from "@/components/landing_page_components/features";
-import JoinUs from "@/components/landing_page_components/join-us";
-import Footer from "@/components/landing_page_components/footer";
-import Video from "@/components/landing_page_components/video";
+import Background from "@/components/landing-page-components/background";
+import Title from "@/components/landing-page-components/title";
+import Features from "@/components/landing-page-components/features";
+import JoinUs from "@/components/landing-page-components/join-us";
+import Footer from "@/components/landing-page-components/footer";
+import Video from "@/components/landing-page-components/video";
 import VideoImg from "@/public/images/landing-page-video-img.jpg";
 
 export default function Landing() {

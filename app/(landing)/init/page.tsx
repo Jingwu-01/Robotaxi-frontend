@@ -149,7 +149,7 @@ export default function SignUp() {
               />
             </div>
 
-            <div className="mb-5">
+            {/* <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
                 htmlFor="password"
@@ -163,7 +163,7 @@ export default function SignUp() {
                 placeholder="0.14"
                 required
               />
-            </div>
+            </div> */}
 
             <div className="mb-5">
               <label

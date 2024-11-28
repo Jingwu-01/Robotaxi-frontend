@@ -1,4 +1,4 @@
-import Background from "@/components/landing_page_components/background";
+import Background from "@/components/landing-page-components/background";
 
 export default function AuthLayout({
   children,
