@@ -1,11 +1,14 @@
 export default function Footer() {
   return (
-    <footer className="mx-auto max-w-6xl px-4 py-8">
+    <footer className="mx-auto px-4 py-8">
         <div className="text-center">
+              {/* Footer Title */}
               <p className="mb-3 text-indigo-200/65">
                 Developed by Andrew Negrut, Tarushi Mittal, Jingwu Wang
               </p>
-              <ul className="inline-flex gap-1">
+
+              {/* Github Logo */}
+              <ul className="inline-flex">
                 <li>
                   <a
                     className="text-indigo-500 hover:text-indigo-400"

@@ -1,12 +1,13 @@
 import Image from "next/image";
 import BlurredShapeGray from "@/public/images/blurred-shape-gray.svg";
-import BlurredShape from "@/public/images/blurred-shape.svg";
+import BlurredShapePurple from "@/public/images/blurred-shape.svg";
 
 export default function Features() {
   return (
     <section className="relative">
+      {/* Decorative shapes */}
       <div
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 -mt-20 -translate-x-1/2"
+        className="absolute left-1/2 top-0 -z-10 -translate-x-1/2"
         aria-hidden="true"
       >
         <Image
@@ -14,23 +15,24 @@ export default function Features() {
           src={BlurredShapeGray}
           width={760}
           height={668}
-          alt="Blurred shape"
+          alt="Blurred gray shape"
         />
       </div>
 
       <div
-        className="pointer-events-none absolute bottom-0 left-1/2 -z-10 -mb-80 -translate-x-[120%] opacity-50"
+        className="absolute bottom-0 left-1/2 -z-10 -mb-80 -translate-x-[120%] opacity-50"
         aria-hidden="true"
       >
         <Image
           className="max-w-none"
-          src={BlurredShape}
+          src={BlurredShapePurple}
           width={760}
           height={668}
-          alt="Blurred shape"
+          alt="Blurred purple shape"
         />
       </div>
       
+     
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,theme(colors.slate.400/.25),transparent)1] md:py-20">
           {/* Section header */}

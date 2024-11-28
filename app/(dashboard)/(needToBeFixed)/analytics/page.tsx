@@ -1,4 +1,5 @@
 import AnalyticsCardConsumption from './analytics-card-consumptionByHour'
+import AnalyticsCardConsumptionRank from './analytics-card-consumptionRank'
 
 export default function Analytics() {
   return (
@@ -7,6 +8,9 @@ export default function Analytics() {
       <div className="flex justify-between items-center mb-8">
           <h1 className="text-3xl text-gray-100 font-bold">Analytics</h1>
       </div>
+
+      <AnalyticsCardConsumptionRank />
+     
 
       {/* Cards */}
       <div className="grid grid-cols-12 gap-6 mt-10">
