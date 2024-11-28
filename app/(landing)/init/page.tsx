@@ -103,7 +103,7 @@ export default function Init() {
                 <span className="text-red-600">*</span>
               </label>
 
-              <Tooltip size="md" bg="dark" className="ml-1 relative transform -translate-y-0.5">
+              <Tooltip className="ml-1 relative transform -translate-y-0.5">
                 <div className="text-xs text-gray-100">
                 Specifies the total duration for which the simulation will run, measured in the simulator's time.
                 </div>
@@ -151,7 +151,7 @@ export default function Init() {
                 Time Step (seconds) <span className="text-red-600">*</span>
               </label>
 
-              <Tooltip size="md" bg="dark" className="ml-1 relative transform -translate-y-0.5">
+              <Tooltip  className="ml-1 relative transform -translate-y-0.5">
                 <div className="text-xs text-gray-100">
                   Time step is the smallest discrete interval of simulated time. A smaller time step will result in a more accurate simulation but will demand more computational resources.
                 </div>
