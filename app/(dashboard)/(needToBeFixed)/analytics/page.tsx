@@ -11,7 +11,6 @@ export default function Analytics() {
 
       <AnalyticsCardConsumptionRank />
      
-
       {/* Cards */}
       <div className="grid grid-cols-12 gap-6 mt-10">
         <AnalyticsCardConsumption />

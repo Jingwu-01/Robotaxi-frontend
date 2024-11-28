@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 
-
 export default function Parameters() {
   const [currentData, setCurrentData] = useState({
     // simulationTime: "",
@@ -27,34 +26,30 @@ export default function Parameters() {
   useEffect(() => {
     const fetchParameters = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/parameters");
-       const result = await response.json();
+        const response = await fetch("http://localhost:5000/status");
+        const result = await response.json();
         if (!response.ok) {
-          throw new Error(result.error || "Failed to fetch parameters");
+          throw new Error(result.message || "Failed to fetch parameters");
         }
-
+  
         setCurrentData({
-          // simulationTime: result.sim_length,
-          // timeStep: result.time_step,
-          // electricityRate: result.electricity_rate,
-          robotaxiCount: result.num_cars,
-          chargingStationCount: result.num_chargers,
-          peopleCount: result.num_people,
-        })
-        
-        setFormData({
-          robotaxiCount: result.num_cars.toString(),
-          chargingStationCount: result.num_chargers.toString(),
-          peopleCount: result.num_people.toString(),
+          robotaxiCount: result.data.num_taxis.toString(),
+          chargingStationCount: result.data.num_chargers.toString(),
+          peopleCount: result.data.num_people.toString(),
         });
-        
+  
+        setFormData({
+          robotaxiCount: result.data.num_taxis.toString(),
+          chargingStationCount: result.data.num_chargers.toString(),
+          peopleCount: result.data.num_people.toString(),
+        });
       } catch (err: any) {
         setError(err.message);
       }
     };
     fetchParameters();
   }, []);
-
+  
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -66,57 +61,97 @@ export default function Parameters() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
-
-    const payload = {
-      // sim_length: parseInt(formData.simulationTime),
-      // time_step: parseFloat(formData.timeStep),
-      // electricity_rate: parseInt(formData.electricityRate),
-      num_cars: parseInt(formData.robotaxiCount),
-      num_chargers: parseInt(formData.chargingStationCount),
-      num_people: parseInt(formData.peopleCount),
-    };
-
+    setMessage(null);
+  
+    const desiredCars = parseInt(formData.robotaxiCount);
+    const desiredChargers = parseInt(formData.chargingStationCount);
+    const desiredPeople = parseInt(formData.peopleCount);
+  
     if (
-      isNaN(payload.num_cars) ||
-      isNaN(payload.num_chargers) ||
-      isNaN(payload.num_people) ||
-      payload.num_cars < 0 ||
-      payload.num_chargers < 0 ||
-      payload.num_people < 0
+      isNaN(desiredCars) ||
+      isNaN(desiredChargers) ||
+      isNaN(desiredPeople) ||
+      desiredCars < 0 ||
+      desiredChargers < 0 ||
+      desiredPeople < 0
     ) {
       setError("Please enter valid positive numbers for all fields.");
       return;
     }
-
-    try {
-      const response = await fetch("http://localhost:5000/api/parameters", {
+  
+    const updates = [];
+  
+    // Determine changes for robotaxis
+    const currentCars = parseInt(currentData.robotaxiCount);
+    if (desiredCars > currentCars) {
+      updates.push(fetch("http://localhost:5000/add_taxi", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to start simulation");
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ num_taxis: desiredCars - currentCars }),
+      }));
+    } else if (desiredCars < currentCars) {
+      updates.push(fetch("http://localhost:5000/remove_taxi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ num_taxis: currentCars - desiredCars }),
+      }));
+    }
+  
+    // Determine changes for charging stations
+    const currentChargers = parseInt(currentData.chargingStationCount);
+    if (desiredChargers > currentChargers) {
+      updates.push(fetch("http://localhost:5000/add_charger", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ num_chargers: desiredChargers - currentChargers }),
+      }));
+    } else if (desiredChargers < currentChargers) {
+      updates.push(fetch("http://localhost:5000/remove_charger", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ num_chargers: currentChargers - desiredChargers }),
+      }));
+    }
+  
+    // Determine changes for people
+    const currentPeople = parseInt(currentData.peopleCount);
+    if (desiredPeople > currentPeople) {
+      updates.push(fetch("http://localhost:5000/add_person", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ num_people: desiredPeople - currentPeople }),
+      }));
+    } else if (desiredPeople < currentPeople) {
+      updates.push(fetch("http://localhost:5000/remove_person", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ num_people: currentPeople - desiredPeople }),
+      }));
+    }
+  
+    try {
+      const responses = await Promise.all(updates);
+      for (const response of responses) {
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.message || "Failed to update parameters");
+        }
       }
-
+  
       setCurrentData({
-        robotaxiCount: payload.num_cars.toString(),
-        chargingStationCount: payload.num_chargers.toString(),
-        peopleCount: payload.num_people.toString(),
+        robotaxiCount: desiredCars.toString(),
+        chargingStationCount: desiredChargers.toString(),
+        peopleCount: desiredPeople.toString(),
       });
-
-      setMessage("Parameters updated successfully");
+  
+      setMessage("Parameters updated successfully.");
     } catch (err: any) {
       setError(err.message);
     } finally {
       console.log("fetch completed");
     }
   };
-
+  
   return (
     <div className="px-8 py-8 w-full max-w-[96rem] mx-auto">
       <div className="mb-8">
@@ -201,7 +236,7 @@ export default function Parameters() {
                   required
                 />
                 <p className="text-gray-300 text-sm mt-1">
-                  {currentData.robotaxiCount}
+                 Current: {currentData.robotaxiCount}
                 </p>
               </div>
 
@@ -223,7 +258,7 @@ export default function Parameters() {
                   required
                 />
                 <p className="text-gray-300 text-sm mt-1">
-                  {currentData.chargingStationCount}
+                Current: {currentData.chargingStationCount}
                 </p>
               </div>
 
@@ -244,7 +279,7 @@ export default function Parameters() {
                   required
                 />
                 <p className="text-gray-300 text-sm mt-1">
-                  {currentData.peopleCount}
+                Current: {currentData.peopleCount}
                 </p>
               </div>
 
