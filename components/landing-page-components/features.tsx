@@ -32,26 +32,26 @@ export default function Features() {
         />
       </div>
       
-     
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="border-t py-12 [border-image:linear-gradient(to_right,transparent,theme(colors.slate.400/.25),transparent)1] md:py-20">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="border-t py-20 [border-image:linear-gradient(to_right,transparent,theme(colors.slate.400/.25),transparent)1]">
+        
           {/* Section header */}
-          <div className="mx-auto max-w-3xl pb-4 text-center md:pb-12">
+          <div className="mx-auto max-w-3xl pb-12 text-center">
             <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-gradient-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-gradient-to-l after:from-transparent after:to-indigo-200/50">
               <span className="inline-flex bg-gradient-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
                 Features
               </span>
             </div>
             <h2 className="animate-[gradient_6s_linear_infinite] bg-[linear-gradient(to_right,theme(colors.gray.200),theme(colors.indigo.200),theme(colors.gray.50),theme(colors.indigo.300),theme(colors.gray.200))] bg-[length:200%_auto] bg-clip-text pb-4 font-nacelle text-3xl font-semibold text-transparent md:text-4xl">
-              Placeholder
+            Comprehensive Simulation Suite
             </h2>
             <p className="text-lg text-indigo-200/65">
-             Placeholder
+            Empower your projects with a full range of tools designed to optimize and analyze your simulations effectively.
             </p>
           </div>
          
           {/* Items */}
-          <div className="mx-auto grid max-w-sm gap-12 sm:max-w-none sm:grid-cols-2 md:gap-x-14 md:gap-y-16 lg:grid-cols-3">
+          <div className="mx-auto grid gap-12 max-w-none gap-x-14 gap-y-16 grid-cols-3">
             <article>
               <svg
                 className="mb-3 fill-indigo-500"
@@ -66,12 +66,13 @@ export default function Features() {
                 />
               </svg>
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-                1
+              Intuitive Dashboard
               </h3>
               <p className="text-indigo-200/65">
-               1
+              Monitor your simulation in real-time with our intuitive dashboard.
               </p>
             </article>
+
             <article>
             <svg
                 className="mb-3 fill-indigo-500"
@@ -86,12 +87,13 @@ export default function Features() {
                 />
               </svg>
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-               2
+              Detailed Analytics
               </h3>
               <p className="text-indigo-200/65">
-               2
+              Get detailed analytics on your simulation to make informed decisions.
               </p>
             </article>
+           
             <article>
             <svg
                 className="mb-3 fill-indigo-500"
@@ -106,12 +108,13 @@ export default function Features() {
                 />
               </svg>
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-               3
+               Optimization 
               </h3>
               <p className="text-indigo-200/65">
-             3
+              Compare your optimized simulation with the baseline simulation.
               </p>
             </article>
+
             <article>
             <svg
                 className="mb-3 fill-indigo-500"
@@ -126,12 +129,13 @@ export default function Features() {
                 />
               </svg>
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-               4
+               Adjust Parameters
               </h3>
               <p className="text-indigo-200/65">
-              4
+                Adjust the parameters of the simulation to fit your needs.
               </p>
             </article>
+
             <article>
             <svg
                 className="mb-3 fill-indigo-500"
@@ -146,12 +150,14 @@ export default function Features() {
                 />
               </svg>
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-               5
+               Robotaxi GPT
               </h3>
               <p className="text-indigo-200/65">
-               5
+               Ask anything related to the simulation to our fine-tuned Robotaxi GPT. 
               </p>
             </article>
+
+          
             <article>
             <svg
                 className="mb-3 fill-indigo-500"
@@ -166,10 +172,10 @@ export default function Features() {
                 />
               </svg>
               <h3 className="mb-1 font-nacelle text-[1rem] font-semibold text-gray-200">
-                6
+                Documentation
               </h3>
               <p className="text-indigo-200/65">
-               6
+                Access our documentation and FAQs to get started with the simulation.
               </p>
             </article>
           </div>
