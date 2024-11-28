@@ -80,7 +80,6 @@ export default function Init() {
 
         <div className="max-w-sm mx-auto">
           <form onSubmit={handleSubmit}>
-
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
@@ -94,22 +93,22 @@ export default function Init() {
             </div>
 
             <div className="mb-5">
-            <div className="flex items-center">
-              <label
-                className="block text-gray-300 text-sm font-medium mb-1"
-                htmlFor="simulationTime"
-              >
-                Simulation Time (seconds){" "}
-                <span className="text-red-600">*</span>
-              </label>
+              <div className="flex items-center">
+                <label
+                  className="block text-gray-300 text-sm font-medium mb-1"
+                  htmlFor="simulationTime"
+                >
+                  Simulation Time (seconds){" "}
+                  <span className="text-red-600">*</span>
+                </label>
 
-              <Tooltip className="ml-1 relative transform -translate-y-0.5">
-                <div className="text-xs text-gray-100">
-                Specifies the total duration for which the simulation will run, measured in the simulator's time.
-                </div>
-              </Tooltip>
-            
-            </div>
+                <Tooltip className="ml-1 relative transform -translate-y-0.5">
+                  <div className="text-xs text-gray-100">
+                    Specifies the total duration for which the simulation will
+                    run, measured in the simulator's time.
+                  </div>
+                </Tooltip>
+              </div>
               <input
                 id="simulationTime"
                 name="simulationTime"
@@ -143,20 +142,22 @@ export default function Init() {
               </div> */}
 
             <div className="mb-5">
-            <div className="flex items-center">
-              <label
-                className="block text-gray-300 text-sm font-medium mb-1"
-                htmlFor="timeStep"
-              >
-                Time Step (seconds) <span className="text-red-600">*</span>
-              </label>
+              <div className="flex items-center">
+                <label
+                  className="block text-gray-300 text-sm font-medium mb-1"
+                  htmlFor="timeStep"
+                >
+                  Time Step (seconds) <span className="text-red-600">*</span>
+                </label>
 
-              <Tooltip  className="ml-1 relative transform -translate-y-0.5">
-                <div className="text-xs text-gray-100">
-                  Time step is the smallest discrete interval of simulated time. A smaller time step will result in a more accurate simulation but will demand more computational resources.
-                </div>
-              </Tooltip>
-              </div>  
+                <Tooltip className="ml-1 relative transform -translate-y-0.5">
+                  <div className="text-xs text-gray-100">
+                    Time step is the smallest discrete interval of simulated
+                    time. A smaller time step will result in a more accurate
+                    simulation but will demand more computational resources.
+                  </div>
+                </Tooltip>
+              </div>
 
               <input
                 id="timeStep"
