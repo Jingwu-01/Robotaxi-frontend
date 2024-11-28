@@ -35,16 +35,16 @@ export default function Init() {
       // city: formData.city,
       sim_length: parseInt(formData.simulationTime),
       // acceleration_factor: parseInt(formData.accelerationFactor),
-      time_step: parseFloat(formData.timeStep),
+      step_length: parseFloat(formData.timeStep),
       // electricity_rate: parseInt(formData.electricityRate),
-      num_cars: parseInt(formData.robotaxiCount),
+      num_taxis: parseInt(formData.robotaxiCount),
       num_chargers: parseInt(formData.chargingStationCount),
       num_people: parseInt(formData.peopleCount),
     };
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/start_simulation",
+        "http://localhost:5000/start_simulation",
         {
           method: "POST",
           headers: {
