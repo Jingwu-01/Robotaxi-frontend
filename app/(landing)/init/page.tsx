@@ -3,7 +3,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
-export default function SignUp() {
+export default function Init() {
   const [formData, setFormData] = useState({
     city: "",
     simulationTime: "",
@@ -71,8 +71,8 @@ export default function SignUp() {
     <section className="relative px-4">
       <div className="pt-20 pb-10">
         <div className="text-center pb-10">
-          <h1 className="h1">Welcome.</h1>
-          <h1 className="h1">We exist to make robotaxi charging easier.</h1>
+          <h1 className="text-md text-gray-100 ">Welcome.</h1>
+          <h1 className="text-md text-gray-100 ">We exist to make robotaxi charging easier.</h1>
         </div>
 
         <div className="max-w-sm mx-auto">
