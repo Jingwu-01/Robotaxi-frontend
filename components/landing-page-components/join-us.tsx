@@ -18,7 +18,6 @@ export default function JoinUs() {
         />
       </div>
       
-      
       <div className="mx-auto px-6">
         <div className="bg-gradient-to-r from-transparent via-gray-800/50 py-20">
           <div className="mx-auto max-w-3xl text-center">

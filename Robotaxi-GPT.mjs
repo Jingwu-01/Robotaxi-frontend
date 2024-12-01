@@ -12,7 +12,7 @@ app.use(cors());
 
 const openai = new OpenAI({
   apiKey:
-    "dummy",
+    "dummy", // Replace with your OpenAI API key
 });
 
 const data_path = "data.xml";

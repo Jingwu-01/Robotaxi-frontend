@@ -78,7 +78,7 @@ export default function ModalVideo({
               </defs>
             </svg>
             <span className="text-sm font-medium leading-tight text-gray-300">
-              Watch Demo
+              Tesla's Robotaxi
               <span className="text-gray-600"> - </span>
               1:06
             </span>
