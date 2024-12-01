@@ -80,7 +80,7 @@ export default function ModalVideo({
             <span className="text-sm font-medium leading-tight text-gray-300">
               Watch Demo
               <span className="text-gray-600"> - </span>
-              1:00
+              1:06
             </span>
           </span>
         </span>
@@ -99,7 +99,7 @@ export default function ModalVideo({
           <div className="mx-auto flex h-full max-w-6xl items-center">
             <DialogPanel
               transition
-              className="aspect-video max-h-full w-full overflow-hidden rounded-2xl bg-black shadow-2xl duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
+              className="aspect-video max-h-full w-full rounded-2xl bg-black shadow-2xl duration-300 ease-out data-[closed]:scale-95 data-[closed]:opacity-0"
             >
               <video
                 ref={videoRef}

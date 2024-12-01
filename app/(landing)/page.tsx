@@ -18,7 +18,7 @@ export default function Landing() {
             thumbWidth={1104}
             thumbHeight={576}
             thumbAlt="Video thumbnail"
-            video="videos/video.mp4"
+            video="videos/robotaxi.mp4"
             videoWidth={1920}
             videoHeight={1080}
           />
