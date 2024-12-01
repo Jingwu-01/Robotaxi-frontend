@@ -1,29 +1,29 @@
-import "../css/style.css"
-
-import { Inter } from 'next/font/google'
+import Sidebar from '@/components/ui/sidebar'
 import Theme from '../theme-provider'
 import AppProvider from '../app-provider'
 
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-})
-
-export default function RootLayout({
+export default function DefaultLayout({
   children,
 }: {
   children: React.ReactNode
-}) {
+}) {  
   return (
-    <div lang="en" className={`${inter.variable}`} suppressHydrationWarning={true}>
-      <div className="font-inter antialiased bg-gray-900 text-gray-400">
-        <Theme>
-          <AppProvider>
-            {children}
-          </AppProvider>
-        </Theme>
+    <div className="flex h-[100dvh] overflow-hidden" suppressHydrationWarning>
+
+<Theme>
+<AppProvider>
+      {/* Sidebar */}
+      <Sidebar />
+
+      {/* Content area */}
+      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <main className="grow [&>*:first-child]:scroll-mt-16 bg-gray-900">
+          {children}
+        </main>        
       </div>
+      </AppProvider>
+      </Theme>
     </div>
+
   )
 }
