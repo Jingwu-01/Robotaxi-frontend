@@ -1,4 +1,4 @@
-import Sidebar from '@/components/ui/sidebar'
+import Sidebar from '@/components/dashboard-page-components/sidebar'
 import Theme from '../theme-provider'
 import AppProvider from '../app-provider'
 
