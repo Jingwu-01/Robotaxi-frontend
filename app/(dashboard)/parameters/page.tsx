@@ -158,7 +158,7 @@ export default function Parameters() {
         <h1 className="text-3xl text-gray-100 font-bold">Parameters</h1>
       </div>
 
-      <div className="flex flex-col col-span-full bg-gray-800 shadow-sm rounded-xl">
+      <div className="flex items-center justify-center bg-gray-800 shadow-sm rounded-xl h-[85vh]">
         <div className="pt-10 pb-10">
           <div className="max-w-sm mx-auto">
             <form onSubmit={handleSubmit}>
