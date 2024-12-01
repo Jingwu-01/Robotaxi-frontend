@@ -24,6 +24,5 @@ export default function DefaultLayout({
       </AppProvider>
       </Theme>
     </div>
-
   )
 }
