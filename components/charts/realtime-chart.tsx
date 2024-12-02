@@ -54,7 +54,7 @@ export default function RealtimeChart({
             suggestedMin: 0,
             ticks: {
               maxTicksLimit: 5,
-              callback: (value) => `${value} kWh`,
+              callback: (value) => `${value} kJ`,
               color:  textColor.dark
             },
             grid: {
@@ -93,7 +93,7 @@ export default function RealtimeChart({
               weight: 600,
             },
             callbacks: {
-              label: (context) => context.parsed.y + ' kWh',
+              label: (context) => context.parsed.y + ' kJ',
             },
             titleColor: tooltipTitleColor.dark,
             bodyColor: tooltipBodyColor.dark,
@@ -119,7 +119,7 @@ export default function RealtimeChart({
       const currentValue = data.datasets[0].data[data.datasets[0].data.length - 1] || 0
       const previousValue = data.datasets[0].data[data.datasets[0].data.length - 2] || 0
       const diff = ((+currentValue - +previousValue) / +previousValue) * 100
-      chartValue.current.innerHTML = `${currentValue.toString()} kWh`
+      chartValue.current.innerHTML = `${currentValue.toString()} kJ`
       if (diff < 0) {
         chartDeviation.current.style.backgroundColor = `rgba(${hexToRGB(tailwindConfig.theme.colors.red[500])}, 0.2)`
         chartDeviation.current.style.color = tailwindConfig.theme.colors.red[700]

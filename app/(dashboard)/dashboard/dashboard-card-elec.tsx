@@ -1,63 +1,69 @@
-"use client";
+'use client'
 
 import { useState, useEffect } from "react";
 import RealtimeChart from "@/components/charts/realtime-chart";
 import { chartAreaGradient } from "@/components/charts/chartjs-config";
 import { tailwindConfig, hexToRGB } from "@/components/utils/utils";
 
+interface ConsumptionData {
+  [key: string]: number;
+}
+
+interface ElectricityConsumptionResponse {
+  status: string;
+  data: ConsumptionData;
+}
+
 export default function DashboardCard_Elec() {
-  const [counter, setCounter] = useState(0);
-  const [increment, setIncrement] = useState(0);
-  const [range, setRange] = useState(35);
-  const data = [
-    50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50,
-    40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40,
-    60, 50, 40, 60,
-  ];
-  const [slicedData, setSlicedData] = useState(data.slice(0, range));
+  const [chartData, setChartData] = useState<number[]>([]);
+  const [labels, setLabels] = useState<Date[]>([]);
 
-  const generateDates = (): Date[] => {
-    const now: Date = new Date();
-    const dates: Date[] = [];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/electricityConsumption");
+        const data: ElectricityConsumptionResponse = await response.json();
 
-    data.forEach((v: any, i: number) => {
-      dates.push(new Date(now.getTime() - 2000 - i * 2000));
-    });
+        if (data.status === "success") {
+          const consumptionData = data.data;
 
-    return dates;
-  };
+          // Sum the electricity consumption of all vehicles
+          const totalConsumption = Object.values(consumptionData).reduce(
+            (sum, value) => sum + value,
+            0
+          );
 
-  const [slicedLabels, setSlicedLabels] = useState(
-    generateDates().slice(0, range).reverse()
+          // Convert to kilojoules (kJ) and round to two decimal places
+          const totalConsumptionKJ = parseFloat((totalConsumption / 1000).toFixed(2));
+
+          // Update chart data and labels
+          setChartData((prevData) => [...prevData.slice(-49), totalConsumptionKJ]);
+          setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
+        } else {
+          console.error("Error fetching data:", data.status);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Fetch data immediately and then at regular intervals
+    fetchData();
+    const interval = setInterval(fetchData, 5000); // Update every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
+  // Format labels for the x-axis (optional)
+  const formattedLabels = labels.map((date) =>
+    date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
   );
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCounter(counter + 1);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [counter]);
-
-  useEffect(() => {
-    setIncrement(increment + 1);
-    if (increment + range < data.length) {
-      setSlicedData(([x, ...slicedData]) => [
-        ...slicedData,
-        data[increment + range],
-      ]);
-    } else {
-      setIncrement(0);
-      setRange(0);
-    }
-    setSlicedLabels(([x, ...slicedLabels]) => [...slicedLabels, new Date()]);
-    return () => setIncrement(0);
-  }, [counter]);
-
-  const chartData = {
-    labels: slicedLabels,
+  const data = {
+    labels: formattedLabels,
     datasets: [
       {
-        data: slicedData,
+        data: chartData,
         fill: true,
         backgroundColor: function (context: any) {
           const chart = context.chart;
@@ -95,9 +101,9 @@ export default function DashboardCard_Elec() {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 bg-gray-800 shadow-sm rounded-xl">
       <header className="px-5 py-4 border-gray-700/60 flex items-center">
-        <h2 className="font-semibold text-gray-100">Electricity Consumption</h2>
+        <h2 className="font-semibold text-gray-100">Electricity Consumption (kJ)</h2>
       </header>
-      <RealtimeChart data={chartData} width={550} height={250} />
+      <RealtimeChart data={data}  width={550} height={250} />
     </div>
   );
 }
