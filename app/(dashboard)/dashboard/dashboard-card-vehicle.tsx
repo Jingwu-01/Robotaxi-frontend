@@ -5,66 +5,49 @@ import RealtimeChart from "@/components/charts/realtime-chart-vehicles";
 import { chartAreaGradient } from "@/components/charts/chartjs-config";
 import { tailwindConfig, hexToRGB } from "@/components/utils/utils";
 
-export default function DashboardCard_Vehicles() {
-  // Fake real-time data
-  const [counter, setCounter] = useState(0);
-  const [increment, setIncrement] = useState(0);
-  const [range, setRange] = useState(35);
-
-  // Dummy data to be looped
-  const data = [
-    50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50,
-    40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40, 60, 50, 40,
-    60, 50, 40, 60,
-  ];
-
-  const [slicedData, setSlicedData] = useState(data.slice(0, range));
-
-  // Generate fake dates from now to back in time
-  const generateDates = (): Date[] => {
-    const now: Date = new Date();
-    const dates: Date[] = [];
-
-    data.forEach((v: any, i: number) => {
-      dates.push(new Date(now.getTime() - 2000 - i * 2000));
-    });
-
-    return dates;
+interface TaxisWithPassengersResponse {
+  status: string;
+  data: {
+    taxis_with_passengers: number;
   };
+}
 
-  const [slicedLabels, setSlicedLabels] = useState(
-    generateDates().slice(0, range).reverse()
-  );
+export default function DashboardCard_Vehicles() {
+  const [chartData, setChartData] = useState<number[]>([]);
+  const [labels, setLabels] = useState<Date[]>([]);
 
-  // Fake update every 2 seconds
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCounter(counter + 1);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [counter]);
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/taxisWithPassengers");
+        const data: TaxisWithPassengersResponse = await response.json();
+        if (data.status === "success") {
+          const taxisWithPassengersCount = data.data.taxis_with_passengers;
 
-  // Loop through data array and update
-  useEffect(() => {
-    setIncrement(increment + 1);
-    if (increment + range < data.length) {
-      setSlicedData(([x, ...slicedData]) => [
-        ...slicedData,
-        data[increment + range],
-      ]);
-    } else {
-      setIncrement(0);
-      setRange(0);
-    }
-    setSlicedLabels(([x, ...slicedLabels]) => [...slicedLabels, new Date()]);
-    return () => setIncrement(0);
-  }, [counter]);
+          setChartData((prevData) => [...prevData.slice(-49), taxisWithPassengersCount]);
+          setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
+        } else {
+          console.error("Error fetching data:", data.status);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
 
-  const chartData = {
-    labels: slicedLabels,
+    // Fetch data immediately and then at regular intervals
+    fetchData();
+    const interval = setInterval(fetchData, 5000); // Update every 5 seconds
+
+    return () => clearInterval(interval); // Cleanup on unmount
+  }, []);
+
+  const chartDataConfig = {
+    labels: labels.map((date) =>
+      date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
+    ),
     datasets: [
       {
-        data: slicedData,
+        data: chartData,
         fill: true,
         backgroundColor: function (context: any) {
           const chart = context.chart;
@@ -102,9 +85,9 @@ export default function DashboardCard_Vehicles() {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 bg-gray-800 shadow-sm rounded-xl">
       <header className="px-5 py-4 border-gray-700/60 flex items-center">
-        <h2 className="font-semibold text-gray-100">Active Taxis</h2>
+        <h2 className="font-semibold text-gray-100">Taxis with Passengers</h2>
       </header>
-      <RealtimeChart data={chartData} width={595} height={248} />
+      <RealtimeChart data={chartDataConfig} width={595} height={248} />
     </div>
   );
 }
