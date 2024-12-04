@@ -6,6 +6,10 @@ import AnalyticsMean from "./mean"
 import AnalyticsSd from "./sd"
 import AnalyticsWaiting from "./waitingTime"
 import AnalyticsBatteryLevels from "./analytics-batteryLevels"
+import AnalyticsBatteryMax from './b-max'
+import AnalyticsBatteryMin from './b-min'
+import AnalyticsBatteryMean from './b-mean'
+import AnalyticsBatterySd from './b-sd'
 
 export default function Analytics() {
   return (
@@ -15,16 +19,21 @@ export default function Analytics() {
           <h1 className="text-3xl text-gray-100 font-bold">Analytics</h1>
       </div>
 
-      <AnalyticsCardConsumptionRank />
+    
      
       {/* Cards */}
       <div className="grid grid-cols-12 gap-6 mt-10">
+      <AnalyticsCardConsumptionRank />
         <AnalyticsMax />
         <AnalyticsMin />
         <AnalyticsMean />
         <AnalyticsSd />
 
         <AnalyticsBatteryLevels />
+        <AnalyticsBatteryMax />
+        <AnalyticsBatteryMin />
+        <AnalyticsBatteryMean />
+        <AnalyticsBatterySd />
 
         <AnalyticsWaiting />
         <AnalyticsCardConsumption />

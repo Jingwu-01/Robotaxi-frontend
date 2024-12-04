@@ -75,7 +75,7 @@ export default function AnalyticsCard05() {
     : 0;
 
   return (
-    <div className="flex flex-col col-span-6 bg-gray-800 shadow-sm rounded-xl">
+    <div className="flex flex-col col-span-12 bg-gray-800 shadow-sm rounded-xl">
       <header className="px-5 py-4 border-b border-gray-700/60">
         <h2 className="font-semibold text-gray-100">
           Electricity Consumption Rank
