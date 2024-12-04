@@ -1,5 +1,9 @@
 import AnalyticsCardConsumption from './analytics-card-consumptionByHour'
 import AnalyticsCardConsumptionRank from './analytics-card-consumptionRank'
+import AnalyticsMax from "./max"
+import AnalyticsMin from "./min"
+import AnalyticsMean from "./mean"
+import AnalyticsSd from "./sd"
 
 export default function Analytics() {
   return (
@@ -13,8 +17,11 @@ export default function Analytics() {
      
       {/* Cards */}
       <div className="grid grid-cols-12 gap-6 mt-10">
-        <AnalyticsCardConsumption />
-        <AnalyticsCardConsumption />
+        <AnalyticsMax />
+        <AnalyticsMin />
+        <AnalyticsMean />
+        <AnalyticsSd />
+
         <AnalyticsCardConsumption />
       </div>
     </div>
