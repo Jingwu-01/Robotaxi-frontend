@@ -4,6 +4,8 @@ import AnalyticsMax from "./max"
 import AnalyticsMin from "./min"
 import AnalyticsMean from "./mean"
 import AnalyticsSd from "./sd"
+import AnalyticsWaiting from "./waitingTime"
+import AnalyticsBatteryLevels from "./analytics-batteryLevels"
 
 export default function Analytics() {
   return (
@@ -22,7 +24,11 @@ export default function Analytics() {
         <AnalyticsMean />
         <AnalyticsSd />
 
+        <AnalyticsBatteryLevels />
+
+        <AnalyticsWaiting />
         <AnalyticsCardConsumption />
+
       </div>
     </div>
   )
