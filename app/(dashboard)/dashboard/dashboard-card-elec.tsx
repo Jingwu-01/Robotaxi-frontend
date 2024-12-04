@@ -33,10 +33,8 @@ export default function DashboardCard_Elec() {
             0
           );
 
-          // Convert to kilojoules (kJ) and round to two decimal places
           const totalConsumptionKJ = parseFloat((totalConsumption / 1000).toFixed(2));
 
-          // Update chart data and labels
           setChartData((prevData) => [...prevData.slice(-49), totalConsumptionKJ]);
           setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
         } else {
@@ -47,14 +45,12 @@ export default function DashboardCard_Elec() {
       }
     };
 
-    // Fetch data immediately and then at regular intervals
     fetchData();
-    const interval = setInterval(fetchData, 5000); // Update every 5 seconds
+    const interval = setInterval(fetchData, 1000); 
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval); 
   }, []);
 
-  // Format labels for the x-axis (optional)
   const formattedLabels = labels.map((date) =>
     date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
   );

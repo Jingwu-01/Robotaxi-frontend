@@ -3,15 +3,17 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Tooltip from "@/components/tooltip";
+import { useElectricityPrice } from "@/contexts/electricityPriceContext";
 
 export default function Init() {
+  const { setElectricityPrice } = useElectricityPrice();
+
   const [formData, setFormData] = useState({
     city: "",
     simulationTime: "",
     // accelerationFactor: "",
     timeStep: "",
-    // electricityRate: "",
-    electricityPrice: "",
+    electricityRate: "",
     robotaxiCount: "",
     chargingStationCount: "",
     peopleCount: "",
@@ -36,23 +38,20 @@ export default function Init() {
       sim_length: parseInt(formData.simulationTime),
       // acceleration_factor: parseInt(formData.accelerationFactor),
       step_length: parseFloat(formData.timeStep),
-      // electricity_rate: parseInt(formData.electricityRate),
+      electricity_rate: parseFloat(formData.electricityRate),
       num_taxis: parseInt(formData.robotaxiCount),
       num_chargers: parseInt(formData.chargingStationCount),
       num_people: parseInt(formData.peopleCount),
     };
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/start_simulation",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+      const response = await fetch("http://localhost:5000/start_simulation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
 
       const result = await response.json();
 
@@ -60,6 +59,7 @@ export default function Init() {
         throw new Error(result.error || "Failed to start simulation");
       }
       console.log(result.status);
+      setElectricityPrice(payload.electricity_rate);
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.message);
@@ -170,19 +170,22 @@ export default function Init() {
                 required
               />
             </div>
-            
+
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
-                htmlFor="password"
+                htmlFor="electricityRate"
               >
                 Electricity Rate ($/kWh) <span className="text-red-600">*</span>
               </label>
               <input
-                id="password"
+                id="electricityRate"
+                name="electricityRate"
                 type="text"
                 className="form-input w-full text-gray-300"
                 placeholder="0.14"
+                value={formData.electricityRate}
+                onChange={handleChange}
                 required
               />
             </div>

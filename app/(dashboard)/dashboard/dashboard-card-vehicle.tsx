@@ -34,11 +34,10 @@ export default function DashboardCard_Vehicles() {
       }
     };
 
-    // Fetch data immediately and then at regular intervals
     fetchData();
-    const interval = setInterval(fetchData, 5000); // Update every 5 seconds
+    const interval = setInterval(fetchData, 1000); 
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval); 
   }, []);
 
   const chartDataConfig = {
