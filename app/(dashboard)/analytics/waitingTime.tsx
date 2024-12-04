@@ -67,7 +67,6 @@ export default function AverageWaitTimeChart() {
             ? `${averageWaitTimes[averageWaitTimes.length - 1].toFixed(2)} seconds`
             : "Loading..."}
         </div>
-       
       </div>
     </div>
   );
