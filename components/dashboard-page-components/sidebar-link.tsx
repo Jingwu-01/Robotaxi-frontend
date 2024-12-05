@@ -6,7 +6,7 @@ interface SidebarLinkProps {
   href: string
 }
 
-export default function SidebarLink({
+export default function SidebarLink({  
   children,
   href,
 }: SidebarLinkProps) {
