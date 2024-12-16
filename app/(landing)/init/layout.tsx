@@ -1,6 +1,7 @@
 import Background from "@/components/landing-page-components/background";
 
-export default function AuthLayout({
+// initialization page layout
+export default function InitLayout({
   children,
 }: {
   children: React.ReactNode;

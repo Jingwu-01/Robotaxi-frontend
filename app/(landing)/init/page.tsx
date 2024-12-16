@@ -3,24 +3,27 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Tooltip from "@/components/tooltip";
-import { useElectricityPrice } from "@/contexts/electricityPriceContext";
 
+// initialization page component
 export default function Init() {
-  const { setElectricityPrice } = useElectricityPrice();
 
+  // form data
   const [formData, setFormData] = useState({
     city: "",
     simulationTime: "",
-    // accelerationFactor: "",
     timeStep: "",
     electricityRate: "",
     robotaxiCount: "",
     chargingStationCount: "",
     peopleCount: "",
   });
+  // error state
   const [error, setError] = useState<string | null>(null);
+  // router instance
   const router = useRouter();
+  // const { setElectricityPrice } = useElectricityPrice();
 
+  // handle form input change
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -29,14 +32,14 @@ export default function Init() {
     }));
   };
 
+  // handle form submission
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
 
+    // form data payload
     const payload = {
-      // city: formData.city,
       sim_length: parseInt(formData.simulationTime),
-      // acceleration_factor: parseInt(formData.accelerationFactor),
       step_length: parseFloat(formData.timeStep),
       electricity_rate: parseFloat(formData.electricityRate),
       num_taxis: parseInt(formData.robotaxiCount),
@@ -44,6 +47,7 @@ export default function Init() {
       num_people: parseInt(formData.peopleCount),
     };
 
+    // start simulation
     try {
       const response = await fetch("http://localhost:5000/start_simulation", {
         method: "POST",
@@ -59,7 +63,7 @@ export default function Init() {
         throw new Error(result.error || "Failed to start simulation");
       }
       console.log(result.status);
-      setElectricityPrice(payload.electricity_rate);
+      // setElectricityPrice(payload.electricity_rate);
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.message);
@@ -71,6 +75,8 @@ export default function Init() {
   return (
     <section className="relative px-4">
       <div className="pt-20 pb-10">
+
+        {/* title */}
         <div className="text-center pb-10">
           <h1 className="text-md text-gray-100 ">Welcome.</h1>
           <h1 className="text-md text-gray-100 ">
@@ -78,8 +84,11 @@ export default function Init() {
           </h1>
         </div>
 
+        {/* form */}
         <div className="max-w-sm mx-auto">
           <form onSubmit={handleSubmit}>
+
+            {/* city */}
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
@@ -92,6 +101,7 @@ export default function Init() {
               </select>
             </div>
 
+            {/* simulation time */}
             <div className="mb-5">
               <div className="flex items-center">
                 <label
@@ -121,26 +131,7 @@ export default function Init() {
               />
             </div>
 
-            {/* <div className="mb-5">
-                <label
-                  className="block text-gray-300 text-sm font-medium mb-1"
-                  htmlFor="accelerationFactor"
-                >
-                  Acceleration Factor{" "}
-                  <span className="text-red-600">*</span>
-                </label>
-                <input
-                  id="accelerationFactor"
-                  name="accelerationFactor"
-                  type="text"
-                  className="form-input w-full text-gray-300"
-                  placeholder="10"
-                  value={formData.accelerationFactor}
-                  onChange={handleChange}
-                  required
-                />
-              </div> */}
-
+            {/* time step */}
             <div className="mb-5">
               <div className="flex items-center">
                 <label
@@ -171,7 +162,8 @@ export default function Init() {
               />
             </div>
 
-            <div className="mb-5">
+            {/* electricity rate */}
+            {/* <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
                 htmlFor="electricityRate"
@@ -188,8 +180,9 @@ export default function Init() {
                 onChange={handleChange}
                 required
               />
-            </div>
+            </div> */}
 
+            {/* robotaxi count */}  
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
@@ -208,7 +201,8 @@ export default function Init() {
                 required
               />
             </div>
-
+            
+            {/* charging station count */}
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
@@ -228,7 +222,8 @@ export default function Init() {
                 required
               />
             </div>
-
+            
+            {/* people count */}
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
@@ -247,13 +242,15 @@ export default function Init() {
                 required
               />
             </div>
-
+            
+            {/* error message */}
             {error && (
               <div className="mb-5">
                 <div className="text-red-600">{error}</div>
               </div>
             )}
 
+            {/* start button */}
             <div className="mt-5">
               <button
                 type="submit"
@@ -264,7 +261,8 @@ export default function Init() {
             </div>
           </form>
         </div>
-
+        
+        {/* footer */}
         <footer className="mt-10 text-center">
           <p className="text-gray-500 mb-2">
             Developed by Andrew Negrut, Tarushi Mittal, Jingwu Wang
