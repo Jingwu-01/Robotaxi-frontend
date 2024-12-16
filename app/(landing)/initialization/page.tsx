@@ -4,27 +4,34 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import Tooltip from "@/components/tooltip";
 
-// initialization page component
-export default function Init() {
+interface FormData {
+  city: string;               
+  simulationTime: string;    
+  timeStep: string;          
+  robotaxiCount: string;     
+  chargingStationCount: string; 
+  peopleCount: string;    
+}
 
-  // form data
-  const [formData, setFormData] = useState({
-    city: "",
+export default function Init() {
+  const [formData, setFormData] = useState<FormData>({
+    city: "Houston",
     simulationTime: "",
     timeStep: "",
-    electricityRate: "",
     robotaxiCount: "",
     chargingStationCount: "",
     peopleCount: "",
   });
-  // error state
-  const [error, setError] = useState<string | null>(null);
-  // router instance
-  const router = useRouter();
-  // const { setElectricityPrice } = useElectricityPrice();
 
-  // handle form input change
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+  // Mode: "Control" => optimized: false; "Optimized" => optimized: true
+  const [mode, setMode] = useState<"Control" | "Optimized">("Control");
+  const [error, setError] = useState<string | null>(null);
+
+  const router = useRouter();
+
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -32,22 +39,19 @@ export default function Init() {
     }));
   };
 
-  // handle form submission
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
 
-    // form data payload
     const payload = {
-      sim_length: parseInt(formData.simulationTime),
+      sim_length: parseInt(formData.simulationTime, 10),
       step_length: parseFloat(formData.timeStep),
-      electricity_rate: parseFloat(formData.electricityRate),
-      num_taxis: parseInt(formData.robotaxiCount),
-      num_chargers: parseInt(formData.chargingStationCount),
-      num_people: parseInt(formData.peopleCount),
+      num_taxis: parseInt(formData.robotaxiCount, 10),
+      num_chargers: parseInt(formData.chargingStationCount, 10),
+      num_people: parseInt(formData.peopleCount, 10),
+      optimized: mode === "Optimized",
     };
 
-    // start simulation
     try {
       const response = await fetch("http://localhost:5000/start_simulation", {
         method: "POST",
@@ -62,8 +66,8 @@ export default function Init() {
       if (!response.ok) {
         throw new Error(result.error || "Failed to start simulation");
       }
-      console.log(result.status);
-      // setElectricityPrice(payload.electricity_rate);
+
+      console.log(result.message);
       router.push("/dashboard");
     } catch (err: any) {
       setError(err.message);
@@ -75,11 +79,10 @@ export default function Init() {
   return (
     <section className="relative px-4">
       <div className="pt-20 pb-10">
-
         {/* title */}
         <div className="text-center pb-10">
-          <h1 className="text-md text-gray-100 ">Welcome.</h1>
-          <h1 className="text-md text-gray-100 ">
+          <h1 className="text-md text-gray-100">Welcome.</h1>
+          <h1 className="text-md text-gray-100">
             We exist to make robotaxi charging easier.
           </h1>
         </div>
@@ -87,6 +90,26 @@ export default function Init() {
         {/* form */}
         <div className="max-w-sm mx-auto">
           <form onSubmit={handleSubmit}>
+            {/* mode */}
+            <div className="mb-5">
+              <label
+                className="block text-gray-300 text-sm font-medium mb-1"
+                htmlFor="mode"
+              >
+                Mode <span className="text-red-600">*</span>
+              </label>
+              <select
+                id="mode"
+                name="mode"
+                className="form-select w-full"
+                value={mode}
+                onChange={(e) => setMode(e.target.value as "Control" | "Optimized")}
+                required
+              >
+                <option value="Control">Control</option>
+                <option value="Optimized">Optimized</option>
+              </select>
+            </div>
 
             {/* city */}
             <div className="mb-5">
@@ -96,26 +119,30 @@ export default function Init() {
               >
                 City <span className="text-red-600">*</span>
               </label>
-              <select id="city" className="form-select w-full">
+              <select
+                id="city"
+                name="city"
+                className="form-select w-full"
+                value={formData.city}
+                onChange={handleChange}
+                required
+              >
                 <option>Houston</option>
               </select>
             </div>
 
-            {/* simulation time */}
+            {/* simulation time (sim_length) */}
             <div className="mb-5">
               <div className="flex items-center">
                 <label
                   className="block text-gray-300 text-sm font-medium mb-1"
                   htmlFor="simulationTime"
                 >
-                  Simulation Time (seconds){" "}
-                  <span className="text-red-600">*</span>
+                  Simulation Time (seconds) <span className="text-red-600">*</span>
                 </label>
-
                 <Tooltip className="ml-1 relative transform -translate-y-0.5">
                   <div className="text-xs text-gray-100">
-                    Specifies the total duration for which the simulation will
-                    run, measured in the simulator's time.
+                    Specifies how long the simulation will run.
                   </div>
                 </Tooltip>
               </div>
@@ -131,7 +158,7 @@ export default function Init() {
               />
             </div>
 
-            {/* time step */}
+            {/* time step (step_length) */}
             <div className="mb-5">
               <div className="flex items-center">
                 <label
@@ -140,20 +167,17 @@ export default function Init() {
                 >
                   Time Step (seconds) <span className="text-red-600">*</span>
                 </label>
-
                 <Tooltip className="ml-1 relative transform -translate-y-0.5">
                   <div className="text-xs text-gray-100">
-                    Time step is the smallest discrete interval of simulated
-                    time. A smaller time step will result in a more accurate
-                    simulation but will demand more computational resources.
+                    The smallest discrete interval of simulated time.
                   </div>
                 </Tooltip>
               </div>
-
               <input
                 id="timeStep"
                 name="timeStep"
                 type="text"
+                step="any"
                 className="form-input w-full text-gray-300"
                 placeholder="1"
                 value={formData.timeStep}
@@ -162,27 +186,7 @@ export default function Init() {
               />
             </div>
 
-            {/* electricity rate */}
-            {/* <div className="mb-5">
-              <label
-                className="block text-gray-300 text-sm font-medium mb-1"
-                htmlFor="electricityRate"
-              >
-                Electricity Rate ($/kWh) <span className="text-red-600">*</span>
-              </label>
-              <input
-                id="electricityRate"
-                name="electricityRate"
-                type="text"
-                className="form-input w-full text-gray-300"
-                placeholder="0.14"
-                value={formData.electricityRate}
-                onChange={handleChange}
-                required
-              />
-            </div> */}
-
-            {/* robotaxi count */}  
+            {/* num_taxis */}
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
@@ -201,15 +205,14 @@ export default function Init() {
                 required
               />
             </div>
-            
-            {/* charging station count */}
+
+            {/* num_chargers */}
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
                 htmlFor="chargingStationCount"
               >
-                Number of Charging Stations{" "}
-                <span className="text-red-600">*</span>
+                Number of Charging Stations <span className="text-red-600">*</span>
               </label>
               <input
                 id="chargingStationCount"
@@ -222,8 +225,8 @@ export default function Init() {
                 required
               />
             </div>
-            
-            {/* people count */}
+
+            {/* num_people */}
             <div className="mb-5">
               <label
                 className="block text-gray-300 text-sm font-medium mb-1"
@@ -242,7 +245,7 @@ export default function Init() {
                 required
               />
             </div>
-            
+
             {/* error message */}
             {error && (
               <div className="mb-5">
@@ -261,7 +264,7 @@ export default function Init() {
             </div>
           </form>
         </div>
-        
+
         {/* footer */}
         <footer className="mt-10 text-center">
           <p className="text-gray-500 mb-2">
