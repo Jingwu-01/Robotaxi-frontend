@@ -1,3 +1,5 @@
+// Description: Tailwind CSS configuration file
+
 const plugin = require('tailwindcss/plugin');
 
 /** @type {import('tailwindcss').Config} */

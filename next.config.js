@@ -1,3 +1,5 @@
+// Description: Next.js configuration file.
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: false, // Disable strict mode in development
