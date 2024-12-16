@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Illustration from "@/public/images/page-illustration.svg";
 
+// background component for landing page
 export default function Background() {
   return (
     <>

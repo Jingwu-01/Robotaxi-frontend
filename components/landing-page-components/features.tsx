@@ -2,6 +2,7 @@ import Image from "next/image";
 import BlurredShapeGray from "@/public/images/blurred-shape-gray.svg";
 import BlurredShapePurple from "@/public/images/blurred-shape.svg";
 
+// features component for the landing page
 export default function Features() {
   return (
     <section className="relative">
@@ -35,7 +36,7 @@ export default function Features() {
       <div className="mx-auto max-w-6xl px-6">
         <div className="border-t py-20 [border-image:linear-gradient(to_right,transparent,theme(colors.slate.400/.25),transparent)1]">
         
-          {/* Section header */}
+          {/* Feature header */}
           <div className="mx-auto max-w-3xl pb-12 text-center">
             <div className="inline-flex items-center gap-3 pb-3 before:h-px before:w-8 before:bg-gradient-to-r before:from-transparent before:to-indigo-200/50 after:h-px after:w-8 after:bg-gradient-to-l after:from-transparent after:to-indigo-200/50">
               <span className="inline-flex bg-gradient-to-r from-indigo-500 to-indigo-200 bg-clip-text text-transparent">
@@ -50,7 +51,7 @@ export default function Features() {
             </p>
           </div>
          
-          {/* Items */}
+          {/* Features */}
           <div className="mx-auto grid gap-12 max-w-none gap-x-14 gap-y-16 grid-cols-3">
             <article>
               <svg
@@ -157,7 +158,6 @@ export default function Features() {
               </p>
             </article>
 
-          
             <article>
             <svg
                 className="mb-3 fill-indigo-500"

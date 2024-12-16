@@ -5,6 +5,7 @@ import type { StaticImageData } from "next/image";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import Image from "next/image";
 
+// interface for the video component
 interface ModalVideoProps {
   thumb: StaticImageData;
   thumbWidth: number;
@@ -15,6 +16,7 @@ interface ModalVideoProps {
   videoHeight: number;
 }
 
+// Video component
 export default function ModalVideo({
   thumb,
   thumbWidth,
@@ -29,6 +31,7 @@ export default function ModalVideo({
 
   return (
     <div className="relative">
+      {/* Play Button */}
       <button
         className="group relative flex items-center justify-center rounded-2xl focus:outline-none focus-visible:ring focus-visible:ring-indigo-200"
         onClick={() => {
@@ -48,7 +51,7 @@ export default function ModalVideo({
             alt={thumbAlt}
           />
         </figure>
-      
+
         <span className="pointer-events-none absolute p-2.5 before:absolute before:inset-0 before:rounded-full before:bg-gray-950 before:duration-300 group-hover:before:scale-110">
           <span className="relative flex items-center gap-3">
             <svg
@@ -85,7 +88,8 @@ export default function ModalVideo({
           </span>
         </span>
       </button>
-
+      
+      {/* Video Modal */}
       <Dialog
         initialFocus={videoRef}
         open={modalOpen}

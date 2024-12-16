@@ -1,6 +1,7 @@
 import Image from "next/image";
 import BlurredShapePurple from "@/public/images/blurred-shape.svg";
 
+// join us component for landing page
 export default function JoinUs() {
   return (
     <section className="relative overflow-hidden">
@@ -18,6 +19,7 @@ export default function JoinUs() {
         />
       </div>
       
+      {/* Join us section */}
       <div className="mx-auto px-6">
         <div className="bg-gradient-to-r from-transparent via-gray-800/50 py-20">
           <div className="mx-auto max-w-3xl text-center">
@@ -32,7 +34,7 @@ export default function JoinUs() {
               <div data-aos="fade-up" data-aos-delay={400}>
                 <a
                   className="btn group w-full bg-gradient-to-t from-indigo-600 to-indigo-500 bg-[length:100%_100%] bg-[bottom] text-white shadow-[inset_0px_1px_0px_0px_theme(colors.white/.16)] hover:bg-[length:100%_150%] mb-0 w-auto"
-                  href="init"
+                  href="initialization"
                 >
                   <span className="relative inline-flex items-center">
                     Start Building

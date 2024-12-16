@@ -1,3 +1,4 @@
+// footer component for the landing page
 export default function Footer() {
   return (
     <footer className="mx-auto px-4 py-8">
