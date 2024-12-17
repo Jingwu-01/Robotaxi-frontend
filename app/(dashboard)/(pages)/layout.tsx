@@ -1,5 +1,5 @@
 import Sidebar from "@/components/dashboard-page-components/sidebar";
-import Theme from "../theme-provider";
+import Theme from "../../theme-provider";
 
 export default function DefaultLayout({
   children,

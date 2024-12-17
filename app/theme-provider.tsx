@@ -1,3 +1,5 @@
+// Description: Theme provider for the application.
+
 'use client'
 import { ThemeProvider } from 'next-themes'
 

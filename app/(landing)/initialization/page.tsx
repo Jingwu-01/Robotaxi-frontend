@@ -5,18 +5,20 @@ import { useRouter } from "next/navigation";
 import Tooltip from "@/components/tooltip";
 
 interface FormData {
-  city: string;               
-  simulationTime: string;    
-  timeStep: string;          
-  robotaxiCount: string;     
-  chargingStationCount: string; 
-  peopleCount: string;    
+  city: string;
+  simStartTime: string;
+  simEndTime: string;
+  timeStep: string;
+  robotaxiCount: string;
+  chargingStationCount: string;
+  peopleCount: string;
 }
 
 export default function Init() {
   const [formData, setFormData] = useState<FormData>({
     city: "Houston",
-    simulationTime: "",
+    simStartTime: "",
+    simEndTime: "",
     timeStep: "",
     robotaxiCount: "",
     chargingStationCount: "",
@@ -43,9 +45,23 @@ export default function Init() {
     event.preventDefault();
     setError(null);
 
+    const simStart = parseFloat(formData.simStartTime);
+    const simEnd = parseFloat(formData.simEndTime);
+
+    // Validate sim_start_time and sim_end_time
+    if (simStart < 0) {
+      setError("Simulation start time cannot be less than 0.");
+      return;
+    }
+    if (simEnd > 7200) {
+      setError("Simulation end time cannot be greater than 7200.");
+      return;
+    }
+
     const payload = {
-      sim_length: parseInt(formData.simulationTime, 10),
       step_length: parseFloat(formData.timeStep),
+      sim_start_time: simStart,
+      sim_end_time: simEnd,
       num_taxis: parseInt(formData.robotaxiCount, 10),
       num_chargers: parseInt(formData.chargingStationCount, 10),
       num_people: parseInt(formData.peopleCount, 10),
@@ -103,7 +119,9 @@ export default function Init() {
                 name="mode"
                 className="form-select w-full"
                 value={mode}
-                onChange={(e) => setMode(e.target.value as "Control" | "Optimized")}
+                onChange={(e) =>
+                  setMode(e.target.value as "Control" | "Optimized")
+                }
                 required
               >
                 <option value="Control">Control</option>
@@ -131,28 +149,57 @@ export default function Init() {
               </select>
             </div>
 
-            {/* simulation time (sim_length) */}
+            {/* simulation start time (sim_start_time) */}
             <div className="mb-5">
               <div className="flex items-center">
                 <label
                   className="block text-gray-300 text-sm font-medium mb-1"
-                  htmlFor="simulationTime"
+                  htmlFor="simStartTime"
                 >
-                  Simulation Time (seconds) <span className="text-red-600">*</span>
+                  Simulation Start Time (seconds){" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <Tooltip className="ml-1 relative transform -translate-y-0.5">
                   <div className="text-xs text-gray-100">
-                    Specifies how long the simulation will run.
+                    The simulation start time. The minimum start time is 0. Every 300 seconds in the simulation is equivalent to 1 hour in real life. For example, if the start time is 300 seconds, that means the simulation starts at 1 AM in real life.
                   </div>
                 </Tooltip>
               </div>
               <input
-                id="simulationTime"
-                name="simulationTime"
+                id="simStartTime"
+                name="simStartTime"
                 type="text"
                 className="form-input w-full text-gray-300"
-                placeholder="1000"
-                value={formData.simulationTime}
+                placeholder="0"
+                value={formData.simStartTime}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            {/* simulation end time (sim_end_time) */}
+            <div className="mb-5">
+              <div className="flex items-center">
+                <label
+                  className="block text-gray-300 text-sm font-medium mb-1"
+                  htmlFor="simEndTime"
+                >
+                  Simulation End Time (seconds){" "}
+                  <span className="text-red-600">*</span>
+                </label>
+                <Tooltip className="ml-1 relative transform -translate-y-0.5">
+                  <div className="text-xs text-gray-100">
+                    The simulation end time. The maximum end time is 7200. Every 300 seconds in the simulation is equivalent to 1 hour in real life. For example, if the end time is 4200 seconds, that means the simulation ends at 2 PM in real life.
+                  </div>
+                </Tooltip>
+              </div>
+              <input
+                id="simEndTime"
+                name="simEndTime"
+                type="text"
+                className="form-input w-full text-gray-300"
+                placeholder="7200"
+                value={formData.simEndTime}
                 onChange={handleChange}
                 required
               />

@@ -1,3 +1,5 @@
+// Description: This file contains the layout for the application.
+
 "use client"; 
 
 import "./css/style.css";

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Map from '../../../components/dashboard-page-components/map';
+import Map from '../../../../components/dashboard-page-components/map';
 
 const MapPage: React.FC = () => {
   return (
