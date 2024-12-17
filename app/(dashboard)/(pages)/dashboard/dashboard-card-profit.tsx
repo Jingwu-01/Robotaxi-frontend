@@ -1,69 +1,103 @@
-// Description: Profit card for the dashboard.
+"use client";
 
-'use client'
+import { useState, useEffect } from "react";
+import LineChart01 from "@/components/charts/line-chart-01";
+import { chartAreaGradient } from "@/components/charts/chartjs-config";
+import { tailwindConfig, hexToRGB } from "@/components/utils/utils";
 
-import LineChart01 from '@/components/charts/line-chart-01'
-import { chartAreaGradient } from '@/components/charts/chartjs-config'
-import { tailwindConfig, hexToRGB } from '@/components/utils/utils'
+interface ProfitResponse {
+  status: string;
+  data: {
+    total_profit: number;
+  };
+}
 
 export default function DashboardCard_Profit() {
+  const [currentProfit, setCurrentProfit] = useState<number>(0);
+  const [labels, setLabels] = useState<Date[]>([]);
+  const [chartData, setChartData] = useState<number[]>([]);
 
-  const chartData = {
-    labels: [
-      '12-01-2022', '01-01-2023', '02-01-2023',
-      '03-01-2023', '04-01-2023', '05-01-2023',
-      '06-01-2023', '07-01-2023', '08-01-2023',
-      '09-01-2023', '10-01-2023', '11-01-2023',
-      '12-01-2023', '01-01-2024', '02-01-2024',
-      '03-01-2024', '04-01-2024', '05-01-2024',
-      '06-01-2024', '07-01-2024', '08-01-2024',
-      '09-01-2024', '10-01-2024', '11-01-2024',
-      '12-01-2024', '01-01-2025',
-    ],
+  useEffect(() => {
+    const fetchProfit = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/profit");
+        const data: ProfitResponse = await response.json();
+
+        if (data.status === "success") {
+          const profit = data.data.total_profit;
+          setCurrentProfit(profit);
+          setChartData((prevData) => [...prevData.slice(-49), profit]);
+          setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
+        } else {
+          console.error("Error fetching profit data:", data.status);
+        }
+      } catch (error) {
+        console.error("Error fetching profit data:", error);
+      }
+    };
+
+    fetchProfit();
+    const interval = setInterval(fetchProfit, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const chartDataConfig = {
+    labels: labels.map((date) =>
+      date.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
+    ),
     datasets: [
       {
-        data: [
-          500, 600, 400,  500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400, 500, 600, 400,
-        ],
+        data: chartData,
         fill: true,
-        backgroundColor: function(context: any) {
+        backgroundColor: (context: any) => {
           const chart = context.chart;
-          const {ctx, chartArea} = chart;
+          const { ctx, chartArea } = chart;
           const gradientOrColor = chartAreaGradient(ctx, chartArea, [
-            { stop: 0, color: `rgba(${hexToRGB(tailwindConfig.theme.colors.violet[500])}, 0)` },
-            { stop: 1, color: `rgba(${hexToRGB(tailwindConfig.theme.colors.violet[500])}, 0.2)` }
+            {
+              stop: 0,
+              color: `rgba(${hexToRGB(tailwindConfig.theme.colors.green[500])}, 0)`,
+            },
+            {
+              stop: 1,
+              color: `rgba(${hexToRGB(tailwindConfig.theme.colors.green[500])}, 0.2)`,
+            },
           ]);
-          return gradientOrColor || 'transparent';
-        },   
-        borderColor: tailwindConfig.theme.colors.violet[500],
+          return gradientOrColor || "transparent";
+        },
+        borderColor: tailwindConfig.theme.colors.green[500],
         borderWidth: 2,
         pointRadius: 0,
         pointHoverRadius: 3,
-        pointBackgroundColor: tailwindConfig.theme.colors.violet[500],
-        pointHoverBackgroundColor: tailwindConfig.theme.colors.violet[500],
+        pointBackgroundColor: tailwindConfig.theme.colors.green[500],
+        pointHoverBackgroundColor: tailwindConfig.theme.colors.green[500],
         pointBorderWidth: 0,
         pointHoverBorderWidth: 0,
         clip: 20,
         tension: 0.2,
-      }, 
+      },
     ],
-  }
+  };
 
-  return(
+  return (
     <div className="flex flex-col col-span-4 bg-gray-800 shadow-sm rounded-xl">
       <div className="px-5 pt-5">
         <header className="flex justify-between items-start mb-2">
           <h2 className="text-lg font-semibold text-gray-100 mb-2">Profit</h2>
-
         </header>
         <div className="flex items-start">
-          <div className="text-3xl font-bold text-gray-100 mr-2">$10,000</div>
-          <div className="text-sm font-medium text-green-700 px-1.5 bg-green-500/20 rounded-full">+1%</div>
+          <div className="text-3xl font-bold text-gray-100 mr-2">
+            ${currentProfit.toFixed(2)}
+          </div>
         </div>
       </div>
       <div className="grow max-sm:max-h-[128px] xl:max-h-[128px]">
-        <LineChart01 data={chartData} width={389} height={128} />
+        <LineChart01 data={chartDataConfig} width={389} height={128} />
       </div>
     </div>
-  )
+  );
 }

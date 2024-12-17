@@ -25,6 +25,7 @@ export default function Init() {
     peopleCount: "",
   });
 
+  // Mode: "Control" => optimized: false; "Optimized" => optimized: true
   const [mode, setMode] = useState<"Control" | "Optimized">("Control");
   const [error, setError] = useState<string | null>(null);
 
@@ -47,6 +48,7 @@ export default function Init() {
     const simStart = parseFloat(formData.simStartTime);
     const simEnd = parseFloat(formData.simEndTime);
 
+    // Validate sim_start_time and sim_end_time
     if (simStart < 0) {
       setError("Simulation start time cannot be less than 0.");
       return;
@@ -82,7 +84,6 @@ export default function Init() {
       }
 
       console.log(result.message);
-      // Wait for 8 seconds before redirecting
       await new Promise((resolve) => setTimeout(resolve, 8000));
       router.push("/dashboard");
     } catch (err: any) {
@@ -95,6 +96,7 @@ export default function Init() {
   return (
     <section className="relative px-4">
       <div className="pt-20 pb-10">
+        {/* title */}
         <div className="text-center pb-10">
           <h1 className="text-md text-gray-100">Welcome.</h1>
           <h1 className="text-md text-gray-100">
@@ -102,11 +104,15 @@ export default function Init() {
           </h1>
         </div>
 
+        {/* form */}
         <div className="max-w-sm mx-auto">
           <form onSubmit={handleSubmit}>
             {/* mode */}
             <div className="mb-5">
-              <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="mode">
+              <label
+                className="block text-gray-300 text-sm font-medium mb-1"
+                htmlFor="mode"
+              >
                 Mode <span className="text-red-600">*</span>
               </label>
               <select
@@ -114,7 +120,9 @@ export default function Init() {
                 name="mode"
                 className="form-select w-full"
                 value={mode}
-                onChange={(e) => setMode(e.target.value as "Control" | "Optimized")}
+                onChange={(e) =>
+                  setMode(e.target.value as "Control" | "Optimized")
+                }
                 required
               >
                 <option value="Control">Control</option>
@@ -124,7 +132,10 @@ export default function Init() {
 
             {/* city */}
             <div className="mb-5">
-              <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="city">
+              <label
+                className="block text-gray-300 text-sm font-medium mb-1"
+                htmlFor="city"
+              >
                 City <span className="text-red-600">*</span>
               </label>
               <select
@@ -139,15 +150,19 @@ export default function Init() {
               </select>
             </div>
 
-            {/* simulation start time */}
+            {/* simulation start time (sim_start_time) */}
             <div className="mb-5">
               <div className="flex items-center">
-                <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="simStartTime">
-                  Simulation Start Time (seconds) <span className="text-red-600">*</span>
+                <label
+                  className="block text-gray-300 text-sm font-medium mb-1"
+                  htmlFor="simStartTime"
+                >
+                  Simulation Start Time (seconds){" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <Tooltip className="ml-1 relative transform -translate-y-0.5">
                   <div className="text-xs text-gray-100">
-                    The simulation start time. The minimum start time is 0. Every 300 seconds in the simulation is equivalent to 1 hour in real life.
+                    The simulation start time. The minimum start time is 0. Every 300 seconds in the simulation is equivalent to 1 hour in real life. For example, if the start time is 300 seconds, that means the simulation starts at 1 AM in real life.
                   </div>
                 </Tooltip>
               </div>
@@ -163,15 +178,19 @@ export default function Init() {
               />
             </div>
 
-            {/* simulation end time */}
+            {/* simulation end time (sim_end_time) */}
             <div className="mb-5">
               <div className="flex items-center">
-                <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="simEndTime">
-                  Simulation End Time (seconds) <span className="text-red-600">*</span>
+                <label
+                  className="block text-gray-300 text-sm font-medium mb-1"
+                  htmlFor="simEndTime"
+                >
+                  Simulation End Time (seconds){" "}
+                  <span className="text-red-600">*</span>
                 </label>
                 <Tooltip className="ml-1 relative transform -translate-y-0.5">
                   <div className="text-xs text-gray-100">
-                    The simulation end time. The maximum end time is 7200. Every 300 seconds is equivalent to 1 hour in real life.
+                    The simulation end time. The maximum end time is 7200. Every 300 seconds in the simulation is equivalent to 1 hour in real life. For example, if the end time is 4200 seconds, that means the simulation ends at 2 PM in real life.
                   </div>
                 </Tooltip>
               </div>
@@ -187,15 +206,18 @@ export default function Init() {
               />
             </div>
 
-            {/* time step */}
+            {/* time step (step_length) */}
             <div className="mb-5">
               <div className="flex items-center">
-                <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="timeStep">
+                <label
+                  className="block text-gray-300 text-sm font-medium mb-1"
+                  htmlFor="timeStep"
+                >
                   Time Step (seconds) <span className="text-red-600">*</span>
                 </label>
                 <Tooltip className="ml-1 relative transform -translate-y-0.5">
                   <div className="text-xs text-gray-100">
-                    The smallest discrete interval of simulated time.
+                    The smallest discrete interval of simulated time. A smaller time step will result in a more accurate simulation but will demand more computational resources.
                   </div>
                 </Tooltip>
               </div>
@@ -214,7 +236,10 @@ export default function Init() {
 
             {/* num_taxis */}
             <div className="mb-5">
-              <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="robotaxiCount">
+              <label
+                className="block text-gray-300 text-sm font-medium mb-1"
+                htmlFor="robotaxiCount"
+              >
                 Number of Robotaxis <span className="text-red-600">*</span>
               </label>
               <input
@@ -231,7 +256,10 @@ export default function Init() {
 
             {/* num_chargers */}
             <div className="mb-5">
-              <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="chargingStationCount">
+              <label
+                className="block text-gray-300 text-sm font-medium mb-1"
+                htmlFor="chargingStationCount"
+              >
                 Number of Charging Stations <span className="text-red-600">*</span>
               </label>
               <input
@@ -248,7 +276,10 @@ export default function Init() {
 
             {/* num_people */}
             <div className="mb-5">
-              <label className="block text-gray-300 text-sm font-medium mb-1" htmlFor="peopleCount">
+              <label
+                className="block text-gray-300 text-sm font-medium mb-1"
+                htmlFor="peopleCount"
+              >
                 Number of Passengers <span className="text-red-600">*</span>
               </label>
               <input
@@ -263,12 +294,14 @@ export default function Init() {
               />
             </div>
 
+            {/* error message */}
             {error && (
               <div className="mb-5">
                 <div className="text-red-600">{error}</div>
               </div>
             )}
 
+            {/* start button */}
             <div className="mt-5">
               <button
                 type="submit"
@@ -280,6 +313,7 @@ export default function Init() {
           </form>
         </div>
 
+        {/* footer */}
         <footer className="mt-10 text-center">
           <p className="text-gray-500 mb-2">
             Developed by Andrew Negrut, Tarushi Mittal, Jingwu Wang

@@ -1,4 +1,3 @@
-// Description: Cost card for the dashboard.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,82 +5,66 @@ import LineChart01 from "@/components/charts/line-chart-01";
 import { chartAreaGradient } from "@/components/charts/chartjs-config";
 import { tailwindConfig, hexToRGB } from "@/components/utils/utils";
 
-
-export interface ElectricityConsumptionResponse {
+interface CostResponse {
   status: string;
   data: {
-    [key: string]: number; 
+    total_cost: number;
   };
 }
 
 export default function DashboardCard_Cost() {
-  const [cumulativeConsumption, setCumulativeConsumption] = useState<number>(0); 
-  const [currentCost, setCurrentCost] = useState<number>(0); 
+  const [currentCost, setCurrentCost] = useState<number>(0);
   const [labels, setLabels] = useState<Date[]>([]);
   const [chartData, setChartData] = useState<number[]>([]);
 
   useEffect(() => {
-    const fetchConsumption = async () => {
+    const fetchCost = async () => {
       try {
-        const electricityPrice = 0.14;
-        const response = await fetch("http://localhost:5000/electricityConsumption");
-        const data = (await response.json()) as ElectricityConsumptionResponse;
-  
-        if (data.status === "success" && data.data) {
-          const consumptionData = data.data;
-          const totalConsumptionJ = Object.values(consumptionData).reduce(
-            (sum, value) => sum + value,
-            0
-          );
-  
-         
-          const totalConsumptionKWh = totalConsumptionJ / 3.6e6;
-  
-          
-          const costUSD = totalConsumptionKWh * electricityPrice;
-          const roundedCost = parseFloat(costUSD.toFixed(2));
-          setCurrentCost(roundedCost);
-          setChartData((prevData) => [...prevData.slice(-49), roundedCost]);
+        const response = await fetch("http://localhost:5000/cost");
+        const data: CostResponse = await response.json();
+
+        if (data.status === "success") {
+          const totalCost = data.data.total_cost;
+          setCurrentCost(totalCost);
+          setChartData((prevData) => [...prevData.slice(-49), totalCost]);
           setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
         } else {
-          console.error("Error fetching consumption data:", data.status || "Unknown error");
-
+          console.error("Error fetching cost data:", data.status);
         }
       } catch (error) {
-        console.error("Error fetching consumption data:", error);
-  
+        console.error("Error fetching cost data:", error);
       }
     };
-  
-    fetchConsumption();
-    const interval = setInterval(fetchConsumption, 1000);
-  
+
+    fetchCost();
+    const interval = setInterval(fetchCost, 1000);
+
     return () => clearInterval(interval);
   }, []);
-  
+
   const chartDataConfig = {
     labels: labels.map((date) =>
-      date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
+      date.toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      })
     ),
     datasets: [
       {
         data: chartData,
         fill: true,
-        backgroundColor: function (context: any) {
+        backgroundColor: (context: any) => {
           const chart = context.chart;
           const { ctx, chartArea } = chart;
           const gradientOrColor = chartAreaGradient(ctx, chartArea, [
             {
               stop: 0,
-              color: `rgba(${hexToRGB(
-                tailwindConfig.theme.colors.violet[500]
-              )}, 0)`,
+              color: `rgba(${hexToRGB(tailwindConfig.theme.colors.violet[500])}, 0)`,
             },
             {
               stop: 1,
-              color: `rgba(${hexToRGB(
-                tailwindConfig.theme.colors.violet[500]
-              )}, 0.2)`,
+              color: `rgba(${hexToRGB(tailwindConfig.theme.colors.violet[500])}, 0.2)`,
             },
           ]);
           return gradientOrColor || "transparent";
