@@ -39,9 +39,9 @@ export default function DashboardCard_Elec() {
 
           const totalConsumptionWh = parseFloat(totalConsumption.toFixed(2));
 
-          setChartData((prevData) => [...prevData.slice(-49), totalConsumptionWh]);
+          setChartData((prevData) => [...prevData, totalConsumptionWh]);
           // Instead of a Date object, store the numeric simulationTime
-          setSimulationTimes((prevTimes) => [...prevTimes.slice(-49), simulationTime]);
+          setSimulationTimes((prevTimes) => [...prevTimes, simulationTime]);
 
         } else {
           console.error("Error fetching data:", data.status);

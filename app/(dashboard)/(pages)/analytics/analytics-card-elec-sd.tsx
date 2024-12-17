@@ -30,7 +30,7 @@ export default function StdDevElectricityConsumption() {
           </h2>
         </header>
         <div className="flex items-start">
-          <div className="text-3xl font-bold text-gray-100 mr-2">{stdDevConsumption} J</div>
+          <div className="text-3xl font-bold text-gray-100 mr-2">{stdDevConsumption} Wh</div>
         </div>
       </div>
     </div>

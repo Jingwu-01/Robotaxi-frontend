@@ -28,7 +28,7 @@ export default function MinElectricityConsumption() {
           <h2 className="text-lg font-semibold text-gray-100 mb-2">Min Electricity Consumption</h2>
         </header>
         <div className="flex items-start">
-          <div className="text-3xl font-bold text-gray-100 mr-2">{minConsumption} J</div>
+          <div className="text-3xl font-bold text-gray-100 mr-2">{minConsumption} Wh</div>
         </div>
       </div>
     </div>
