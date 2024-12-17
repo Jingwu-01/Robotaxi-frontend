@@ -1,17 +1,17 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchBatteryLevels } from "./b-fetch";
-import { computeMean } from "./statistics";
+import { fetchBatteryLevels } from "./util-battery-fetch";
+import { computeStdDev } from "./util-statistics";
 
-export default function MeanBatteryLevel() {
-  const [meanBatteryLevel, setMeanBatteryLevel] = useState<number>(0);
+export default function StdDevBatteryLevel() {
+  const [stdDevBatteryLevel, setStdDevBatteryLevel] = useState<number>(0);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchBatteryLevels();
-      const meanValue = computeMean(data);
-      setMeanBatteryLevel(Number(meanValue.toFixed(2)));
+      const stdDevValue = computeStdDev(data);
+      setStdDevBatteryLevel(Number(stdDevValue.toFixed(2)));
     };
 
     fetchData();
@@ -24,10 +24,12 @@ export default function MeanBatteryLevel() {
     <div className="flex flex-col col-span-3 bg-gray-800 shadow-sm rounded-xl">
       <div className="px-5 pt-5">
         <header className="flex justify-between items-start mb-2">
-          <h2 className="text-lg font-semibold text-gray-100 mb-2">Mean Battery Level</h2>
+          <h2 className="text-lg font-semibold text-gray-100 mb-2">
+            Std Dev Battery Level
+          </h2>
         </header>
         <div className="flex items-start">
-          <div className="text-3xl font-bold text-gray-100 mr-2">{meanBatteryLevel}%</div>
+          <div className="text-3xl font-bold text-gray-100 mr-2">{stdDevBatteryLevel}%</div>
         </div>
       </div>
     </div>

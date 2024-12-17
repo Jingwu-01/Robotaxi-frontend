@@ -1,3 +1,5 @@
+// Desciption: Chart.js configuration file
+
 import { Chart, Tooltip } from 'chart.js'
 import { tailwindConfig, hexToRGB } from '@/components/utils/utils'
 

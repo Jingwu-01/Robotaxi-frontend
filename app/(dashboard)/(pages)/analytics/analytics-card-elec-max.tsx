@@ -2,8 +2,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchElectricityConsumption } from "./fetch";
-import { computeMax } from "./statistics";
+import { fetchElectricityConsumption } from "./util-elec-fetch";
+import { computeMax } from "./util-statistics";
 
 export default function MaxElectricityConsumption() {
   const [maxConsumption, setMaxConsumption] = useState<number>(0);

@@ -2,8 +2,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchElectricityConsumption } from "./fetch";
-import { computeMin } from "./statistics";
+import { fetchElectricityConsumption } from "./util-elec-fetch";
+import { computeMin } from "./util-statistics";
 
 export default function MinElectricityConsumption() {
   const [minConsumption, setMinConsumption] = useState<number>(0);

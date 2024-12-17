@@ -8,13 +8,13 @@ import AnalyticsMean from "./mean"
 import AnalyticsSd from "./sd"
 import AnalyticsWaiting from "./waitingTime"
 import AnalyticsBatteryLevels from "./analytics-batteryLevels"
-import AnalyticsBatteryMax from './b-max'
+import AnalyticsBatteryMax from './analytics-card-battery-max'
 import AnalyticsBatteryMin from './b-min'
 import AnalyticsBatteryMean from './b-mean'
 import AnalyticsBatterySd from './b-sd'
 import AnalyticsFleet from './fleet'
 import AnalyticsChargerUtilziation from './chargerUtilization'
-import AnalyticsUnsatisfactionRate from './unsatisfactionRate'
+import AnalyticsUnsatisfactionRate from './analytics-card-unsatisfaction-rate'
 
 export default function Analytics() {
   return (

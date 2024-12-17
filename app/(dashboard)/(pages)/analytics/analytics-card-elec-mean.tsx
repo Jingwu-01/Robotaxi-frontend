@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { fetchElectricityConsumption } from "./fetch";
-import { computeMean } from "./statistics";
+import { fetchElectricityConsumption } from "./util-elec-fetch";
+import { computeMean } from "./util-statistics";
 
 export default function MeanElectricityConsumption() {
   const [meanConsumption, setMeanConsumption] = useState<number>(0);
