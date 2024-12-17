@@ -9,7 +9,7 @@ export default function FAQs() {
 
       <div className="flex flex-col mb-10 gap-10 bg-gray-800 shadow-sm rounded-xl px-5 py-4">
         <div>
-        <p className="text-md font-semibold text-gray-100">Q1: What is question 1?</p>
+        <p className="text-md font-semibold text-gray-100">Q1: Why the cumulative electricity consumption decreases in the dashboard page?</p>
         <p className="text-md font-semibold text-gray-100">Answer 1</p>
         </div>
 

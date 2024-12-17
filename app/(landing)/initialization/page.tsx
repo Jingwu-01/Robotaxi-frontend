@@ -216,7 +216,7 @@ export default function Init() {
                 </label>
                 <Tooltip className="ml-1 relative transform -translate-y-0.5">
                   <div className="text-xs text-gray-100">
-                    The smallest discrete interval of simulated time.
+                    The smallest discrete interval of simulated time. A smaller time step will result in a more accurate simulation but will demand more computational resources.
                   </div>
                 </Tooltip>
               </div>
@@ -226,7 +226,7 @@ export default function Init() {
                 type="text"
                 step="any"
                 className="form-input w-full text-gray-300"
-                placeholder="1"
+                placeholder="0.01"
                 value={formData.timeStep}
                 onChange={handleChange}
                 required

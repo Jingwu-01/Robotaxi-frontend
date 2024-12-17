@@ -29,15 +29,15 @@ export default function Parameters() {
         }
   
         setCurrentData({
-          robotaxiCount: result.data.num_taxis.toString(),
-          chargingStationCount: result.data.num_chargers.toString(),
-          peopleCount: result.data.num_people.toString(),
+          robotaxiCount: result.data.num_taxis_in_sim.toString(),
+          chargingStationCount: result.data.num_active_chargers.toString(),
+          peopleCount: result.data.num_people_in_sim.toString(),
         });
   
         setFormData({
-          robotaxiCount: result.data.num_taxis.toString(),
-          chargingStationCount: result.data.num_chargers.toString(),
-          peopleCount: result.data.num_people.toString(),
+          robotaxiCount: result.data.num_taxis_in_sim.toString(),
+          chargingStationCount: result.data.num_active_chargers.toString(),
+          peopleCount: result.data.num_people_in_sim.toString(),
         });
       } catch (err: any) {
         setError(err.message);

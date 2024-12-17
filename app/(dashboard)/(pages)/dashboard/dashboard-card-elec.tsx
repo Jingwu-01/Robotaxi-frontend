@@ -35,7 +35,7 @@ export default function DashboardCard_Elec() {
             0
           );
 
-          const totalConsumptionKJ = parseFloat((totalConsumption / 1000).toFixed(2));
+          const totalConsumptionKJ = parseFloat((totalConsumption).toFixed(2));
 
           setChartData((prevData) => [...prevData.slice(-49), totalConsumptionKJ]);
           setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
@@ -99,7 +99,7 @@ export default function DashboardCard_Elec() {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 bg-gray-800 shadow-sm rounded-xl">
       <header className="px-5 py-4 border-gray-700/60 flex items-center">
-        <h2 className="font-semibold text-gray-100">Electricity Consumption</h2>
+        <h2 className="font-semibold text-gray-100">Cumumlative Electricity Consumption</h2>
       </header>
       <RealtimeChart data={data}  width={550} height={250} />
     </div>

@@ -54,8 +54,9 @@ export default function RealtimeChart({
             suggestedMin: 0,
             ticks: {
               maxTicksLimit: 5,
-              callback: (value) => `${value} kJ`,
-              color:  textColor.dark
+              // Changed from kJ to Wh
+              callback: (value) => `${value} Wh`,
+              color: textColor.dark
             },
             grid: {
               color: gridColor.dark
@@ -93,7 +94,8 @@ export default function RealtimeChart({
               weight: 600,
             },
             callbacks: {
-              label: (context) => context.parsed.y + ' kJ',
+              // Changed from kJ to Wh
+              label: (context) => context.parsed.y + ' Wh',
             },
             titleColor: tooltipTitleColor.dark,
             bodyColor: tooltipBodyColor.dark,
@@ -119,7 +121,8 @@ export default function RealtimeChart({
       const currentValue = data.datasets[0].data[data.datasets[0].data.length - 1] || 0
       const previousValue = data.datasets[0].data[data.datasets[0].data.length - 2] || 0
       const diff = ((+currentValue - +previousValue) / +previousValue) * 100
-      chartValue.current.innerHTML = `${currentValue.toString()} kJ`
+      // Changed from kJ to Wh
+      chartValue.current.innerHTML = `${currentValue.toString()} Wh`
       if (diff < 0) {
         chartDeviation.current.style.backgroundColor = `rgba(${hexToRGB(tailwindConfig.theme.colors.red[500])}, 0.2)`
         chartDeviation.current.style.color = tailwindConfig.theme.colors.red[700]
@@ -147,7 +150,7 @@ export default function RealtimeChart({
     <>
       <div className="px-5 py-3">
         <div className="flex items-start">
-          <div className="text-3xl font-bold dark:text-gray-100 mr-2 tabular-nums"><span ref={chartValue}>50</span></div>
+          <div className="text-3xl font-bold dark:text-gray-100 mr-2 tabular-nums"><span ref={chartValue}>0</span></div>
           <div ref={chartDeviation} className="text-sm font-medium px-1.5 rounded-full"></div>
         </div>
       </div>
