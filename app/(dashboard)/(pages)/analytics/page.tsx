@@ -1,19 +1,19 @@
 // Description: Analytics page of the dashboard.
 
-import AnalyticsCardConsumption from './analytics-card-consumptionByHour'
-import AnalyticsCardConsumptionRank from './analytics-card-consumptionRank'
-import AnalyticsMax from "./max"
-import AnalyticsMin from "./min"
-import AnalyticsMean from "./mean"
-import AnalyticsSd from "./sd"
-import AnalyticsWaiting from "./waitingTime"
-import AnalyticsBatteryLevels from "./analytics-batteryLevels"
+import AnalyticsCardConsumption from './analytics-card-elec-pie-graph'
+import AnalyticsCardConsumptionRank from './analytics-card-elec-rank'
+import AnalyticsMax from "./analytics-card-elec-max"
+import AnalyticsMin from "./analytics-card-elec-min"
+import AnalyticsMean from "./analytics-card-elec-mean"
+import AnalyticsSd from "./analytics-card-elec-sd"
+import AnalyticsWaiting from "./analytics-card-waiting-time"
+import AnalyticsBatteryLevels from "./analytics-card-battery-rank"
 import AnalyticsBatteryMax from './analytics-card-battery-max'
-import AnalyticsBatteryMin from './b-min'
-import AnalyticsBatteryMean from './b-mean'
-import AnalyticsBatterySd from './b-sd'
-import AnalyticsFleet from './fleet'
-import AnalyticsChargerUtilziation from './chargerUtilization'
+import AnalyticsBatteryMin from './analytics-card-battery-min'
+import AnalyticsBatteryMean from './analytics-card-battery-mean'
+import AnalyticsBatterySd from './analytics-card-battery-sd'
+import AnalyticsFleet from './analytics-card-fleet-utilization-rate'
+import AnalyticsChargerUtilziation from './analytics-card-charger-utilization-rate'
 import AnalyticsUnsatisfactionRate from './analytics-card-unsatisfaction-rate'
 
 export default function Analytics() {
