@@ -20,13 +20,12 @@ export default function AnalyticsCard05() {
         if (data.status === "success") {
           const consumptionData = data.data;
 
-          // Convert consumption data to an array of objects
-          const consumptionArray = Object.entries(consumptionData).map(
-            ([id, consumption]) => ({
+          const consumptionArray = Object.entries(consumptionData)
+            .filter(([id]) => id !== "time")
+            .map(([id, consumption]) => ({
               id,
               consumption: Number(consumption),
-            })
-          );
+            }));
 
           // Sort vehicles by consumption in descending order
           const sortedVehicles = consumptionArray.sort(
@@ -48,7 +47,7 @@ export default function AnalyticsCard05() {
     fetchConsumptionData();
 
     // Refresh data periodically
-    const interval = setInterval(fetchConsumptionData, 1000); // Fetch every second
+    const interval = setInterval(fetchConsumptionData, 1000);
 
     return () => clearInterval(interval); // Cleanup on unmount
   }, [numVehiclesToShow]);

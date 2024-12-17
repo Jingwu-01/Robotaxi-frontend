@@ -11,11 +11,11 @@ export default function MinBatteryLevel() {
     const fetchData = async () => {
       const data = await fetchBatteryLevels();
       const minValue = computeMin(data);
-      setMinBatteryLevel(Number(minValue.toFixed(2))); // Round to two decimal places
+      setMinBatteryLevel(Number(minValue.toFixed(2)));
     };
 
     fetchData();
-    const interval = setInterval(fetchData, 1000); // Update every second
+    const interval = setInterval(fetchData, 1000); 
 
     return () => clearInterval(interval);
   }, []);
