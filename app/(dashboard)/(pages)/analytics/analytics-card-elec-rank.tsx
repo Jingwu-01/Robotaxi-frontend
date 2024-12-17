@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 
+
 export default function AnalyticsCard05() {
   const [vehicles, setVehicles] = useState<
     { id: string; consumption: number }[]

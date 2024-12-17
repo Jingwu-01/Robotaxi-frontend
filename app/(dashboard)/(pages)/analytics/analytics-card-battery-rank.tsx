@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Tooltip from "@/components/tooltip";
 
 export default function BatteryLevelsRank() {
   const [vehicles, setVehicles] = useState<
@@ -68,10 +69,16 @@ export default function BatteryLevelsRank() {
 
   return (
     <div className="flex flex-col col-span-12 bg-gray-800 shadow-sm rounded-xl">
-      <header className="px-5 py-4 border-b border-gray-700/60">
-        <h2 className="font-semibold text-gray-100">
+      <header className="flex items-center px-5 py-4 border-b border-gray-700/60">
+        <h2 className="font-semibold text-gray-100 ">
           Vehicle Battery Levels
         </h2>
+        <Tooltip className="ml-2 relative transform">
+          <div className="text-xs text-gray-100">
+            Battery levels of vehicles in ascending order.
+            Battery levels smaller than 20% are highlighted in red, between 20% and 50% are highlighted in yellow, greater than 50% are highlighted in green.
+         </div>
+        </Tooltip>
       </header>
 
       <div className="grow p-3">
