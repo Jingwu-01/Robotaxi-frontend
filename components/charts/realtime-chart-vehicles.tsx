@@ -62,15 +62,7 @@ export default function RealtimeChart({
             },   
           },
           x: {
-            type: 'time',
-            time: {
-              parser: 'hh:mm:ss',
-              unit: 'second',
-              tooltipFormat: 'MMM DD, H:mm:ss a',
-              displayFormats: {
-                second: 'H:mm:ss',
-              },
-            },
+            type: 'linear',
             border: {
               display: false,
             },

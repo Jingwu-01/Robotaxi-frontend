@@ -1,4 +1,3 @@
-// Description: Active passengers card for the dashboard.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -10,12 +9,13 @@ interface ActivePassengersResponse {
   status: string;
   data: {
     active_passengers: number;
+    time: number; // Ensure backend returns this
   };
 }
 
 export default function DashboardCard_Passengers() {
   const [chartData, setChartData] = useState<number[]>([]);
-  const [labels, setLabels] = useState<Date[]>([]);
+  const [simulationTimes, setSimulationTimes] = useState<number[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,10 +24,11 @@ export default function DashboardCard_Passengers() {
         const data: ActivePassengersResponse = await response.json();
         if (data.status === "success") {
           const activePassengersCount = data.data.active_passengers;
+          const simulationTime = data.data.time; 
 
-          // Update chart data and labels
+          // Update chart data and simulation times
           setChartData((prevData) => [...prevData.slice(-49), activePassengersCount]);
-          setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
+          setSimulationTimes((prevTimes) => [...prevTimes.slice(-49), simulationTime]);
         } else {
           console.error("Error fetching data:", data.status);
         }
@@ -36,36 +37,31 @@ export default function DashboardCard_Passengers() {
       }
     };
 
-    // Fetch data immediately and then at regular intervals
+    // Fetch data immediately and then at regular intervals (e.g., every second)
     fetchData();
-    const interval = setInterval(fetchData, 1000); // Update every 5 seconds
+    const interval = setInterval(fetchData, 1000);
 
-    return () => clearInterval(interval); // Cleanup on unmount
+    return () => clearInterval(interval);
   }, []);
 
   const chartDataConfig = {
-    labels: labels.map((date) =>
-      date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
-    ),
+    // Here, labels are the numeric simulation time values.
+    labels: simulationTimes,
     datasets: [
       {
         data: chartData,
         fill: true,
-        backgroundColor: function (context: any) {
+        backgroundColor: (context: any) => {
           const chart = context.chart;
           const { ctx, chartArea } = chart;
           const gradientOrColor = chartAreaGradient(ctx, chartArea, [
             {
               stop: 0,
-              color: `rgba(${hexToRGB(
-                tailwindConfig.theme.colors.violet[500]
-              )}, 0)`,
+              color: `rgba(${hexToRGB(tailwindConfig.theme.colors.violet[500])}, 0)`,
             },
             {
               stop: 1,
-              color: `rgba(${hexToRGB(
-                tailwindConfig.theme.colors.violet[500]
-              )}, 0.2)`,
+              color: `rgba(${hexToRGB(tailwindConfig.theme.colors.violet[500])}, 0.2)`,
             },
           ]);
           return gradientOrColor || "transparent";
