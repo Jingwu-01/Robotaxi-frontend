@@ -27,8 +27,8 @@ export default function DashboardCard_Passengers() {
           const simulationTime = data.data.time; 
 
           // Update chart data and simulation times
-          setChartData((prevData) => [...prevData.slice(-49), activePassengersCount]);
-          setSimulationTimes((prevTimes) => [...prevTimes.slice(-49), simulationTime]);
+          setChartData((prevData) => [...prevData, activePassengersCount]);
+          setSimulationTimes((prevTimes) => [...prevTimes, simulationTime]);
         } else {
           console.error("Error fetching data:", data.status);
         }

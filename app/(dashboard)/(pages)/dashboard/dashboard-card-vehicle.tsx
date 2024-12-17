@@ -1,5 +1,3 @@
-// Description: The taxis with passengers card for the dashboard.
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -11,12 +9,13 @@ interface TaxisWithPassengersResponse {
   status: string;
   data: {
     taxis_with_passengers: number;
+    time: number; 
   };
 }
 
 export default function DashboardCard_Vehicles() {
   const [chartData, setChartData] = useState<number[]>([]);
-  const [labels, setLabels] = useState<Date[]>([]);
+  const [simulationTimes, setSimulationTimes] = useState<number[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,9 +24,11 @@ export default function DashboardCard_Vehicles() {
         const data: TaxisWithPassengersResponse = await response.json();
         if (data.status === "success") {
           const taxisWithPassengersCount = data.data.taxis_with_passengers;
+          const simulationTime = data.data.time; // numeric simulation time from the backend
 
+          // Update chart data and simulation times
           setChartData((prevData) => [...prevData.slice(-49), taxisWithPassengersCount]);
-          setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
+          setSimulationTimes((prevTimes) => [...prevTimes.slice(-49), simulationTime]);
         } else {
           console.error("Error fetching data:", data.status);
         }
@@ -36,16 +37,15 @@ export default function DashboardCard_Vehicles() {
       }
     };
 
+    // Fetch data immediately and then at regular intervals
     fetchData();
-    const interval = setInterval(fetchData, 1000); 
+    const interval = setInterval(fetchData, 1000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, []);
 
   const chartDataConfig = {
-    labels: labels.map((date) =>
-      date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
-    ),
+    labels: simulationTimes, // numeric simulation times for the x-axis
     datasets: [
       {
         data: chartData,

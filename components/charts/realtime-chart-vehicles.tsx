@@ -73,6 +73,7 @@ export default function RealtimeChart({
               autoSkipPadding: 48,
               maxRotation: 0,
               color: textColor.dark,
+                callback: (value) => `${value}s`
             },
           },
         },

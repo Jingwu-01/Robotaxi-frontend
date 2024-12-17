@@ -1,4 +1,3 @@
-// Description: Chargers being used card for the dashboard.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -10,12 +9,13 @@ interface ActiveChargersResponse {
   status: string;
   data: {
     active_chargers: number;
+    time: number; // numeric simulation time
   };
 }
 
 export default function DashboardCard_Chargers() {
   const [chartData, setChartData] = useState<number[]>([]);
-  const [labels, setLabels] = useState<Date[]>([]);
+  const [simulationTimes, setSimulationTimes] = useState<number[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,10 +24,11 @@ export default function DashboardCard_Chargers() {
         const data: ActiveChargersResponse = await response.json();
         if (data.status === "success") {
           const activeChargersCount = data.data.active_chargers;
+          const simulationTime = data.data.time;
 
-          // Update chart data and labels
-          setChartData((prevData) => [...prevData.slice(-49), activeChargersCount]);
-          setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
+          // Update chart data and simulation times
+          setChartData((prevData) => [...prevData, activeChargersCount]);
+          setSimulationTimes((prevTimes) => [...prevTimes, simulationTime]);
         } else {
           console.error("Error fetching data:", data.status);
         }
@@ -38,14 +39,11 @@ export default function DashboardCard_Chargers() {
 
     fetchData();
     const interval = setInterval(fetchData, 1000); 
-
     return () => clearInterval(interval); 
   }, []);
 
   const chartDataConfig = {
-    labels: labels.map((date) =>
-      date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
-    ),
+    labels: simulationTimes, // numeric simulation times directly from server
     datasets: [
       {
         data: chartData,
@@ -56,18 +54,14 @@ export default function DashboardCard_Chargers() {
           const gradientOrColor = chartAreaGradient(ctx, chartArea, [
             {
               stop: 0,
-              color: `rgba(${hexToRGB(
-                tailwindConfig.theme.colors.violet[500]
-              )}, 0)`,
+              color: `rgba(${hexToRGB(tailwindConfig.theme.colors.violet[500])}, 0)`,
             },
             {
               stop: 1,
-              color: `rgba(${hexToRGB(
-                tailwindConfig.theme.colors.violet[500]
-              )}, 0.2)`,
+              color: `rgba(${hexToRGB(tailwindConfig.theme.colors.violet[500])}, 0.2)`,
             },
           ]);
-          return gradientOrColor || 'transparent';
+          return gradientOrColor || "transparent";
         },
         borderColor: tailwindConfig.theme.colors.violet[500],
         borderWidth: 2,

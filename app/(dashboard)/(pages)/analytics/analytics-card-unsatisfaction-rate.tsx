@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 interface PassengerUnsatisfactionResponse {
   status: string;
   data: {
-    unsatisfaction_percentage: number;
+    unsatisfaction_percentage?: number;
   };
 }
 
@@ -15,19 +15,20 @@ export default function PassengerUnsatisfaction() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetch the unsatisfaction percentage
         const response = await fetch("http://localhost:5000/passengerUnsatisfaction");
         const data: PassengerUnsatisfactionResponse = await response.json();
 
-        if (data.status === "success") {
+        if (data.status === "success" && typeof data.data.unsatisfaction_percentage === "number") {
           const percentage = data.data.unsatisfaction_percentage;
           setUnsatisfactionPercentage(Number(percentage.toFixed(2)));
         } else {
-          console.error("Error fetching data:", data.status);
+          // You can remove or change this console call if you don't want overlays
+          console.log("Non-success response or invalid data from the server.");
           setUnsatisfactionPercentage(0);
         }
       } catch (error) {
-        console.error("Error fetching data:", error);
+        // Consider changing console.error to console.log to avoid dev overlay
+        console.log("Error fetching data:", error);
         setUnsatisfactionPercentage(0);
       }
     };
