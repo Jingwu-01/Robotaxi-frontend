@@ -1,3 +1,5 @@
+// Description: Analytics page of the dashboard.
+
 import AnalyticsCardConsumption from './analytics-card-consumptionByHour'
 import AnalyticsCardConsumptionRank from './analytics-card-consumptionRank'
 import AnalyticsMax from "./max"

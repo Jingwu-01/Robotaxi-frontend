@@ -1,3 +1,5 @@
+// Description: Contact page of the help section.
+
 export default function Contact() {
   return (
     <div className="px-8 py-8 w-full max-w-[96rem] mx-auto">

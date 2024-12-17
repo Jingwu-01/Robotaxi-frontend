@@ -1,3 +1,5 @@
+// Description: Dashboard page of the dashboard.
+
 import DashboardCardProfit from "./dashboard-card-profit";
 import DashboardCardRevenue from "./dashboard-card-revenue";
 import DashboardCardCost from "./dashboard-card-cost";

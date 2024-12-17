@@ -1,3 +1,5 @@
+// Description: Component to display a map with vehicle, charger, and passenger positions.
+
 "use client";
 
 import React, { useEffect, useState } from 'react';

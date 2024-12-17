@@ -1,3 +1,5 @@
+// Description: FAQs page of the help section.
+
 export default function FAQs() {
   return (
     <div className="px-8 py-8 w-full max-w-[96rem] mx-auto">

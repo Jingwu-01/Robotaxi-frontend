@@ -1,3 +1,5 @@
+// Desciption: Sidebar component for the dashboard page.
+
 "use client";
 
 import { useRef} from "react";

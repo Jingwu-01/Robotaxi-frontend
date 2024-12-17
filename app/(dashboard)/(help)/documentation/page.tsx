@@ -1,3 +1,5 @@
+// Description: Documentation page of the help section.
+
 export default function Documentation() {
   return (
     <div className="px-8 py-8 w-full max-w-[96rem] mx-auto">

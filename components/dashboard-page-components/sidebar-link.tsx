@@ -1,3 +1,5 @@
+// Description: Component for a link in the sidebar.
+
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 

@@ -1,3 +1,5 @@
+// Description: The GPT page of the dashboard.
+
 "use client";
 import React, { useState, ChangeEvent, FormEvent } from "react";
 

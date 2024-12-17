@@ -1,7 +1,9 @@
+// Description: Electricity consumption card for the dashboard.
+
 'use client'
 
 import { useState, useEffect } from "react";
-import RealtimeChart from "@/components/charts/realtime-chart";
+import RealtimeChart from "@/components/charts/realtime-chart-elec";
 import { chartAreaGradient } from "@/components/charts/chartjs-config";
 import { tailwindConfig, hexToRGB } from "@/components/utils/utils";
 

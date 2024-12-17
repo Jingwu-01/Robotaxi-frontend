@@ -1,3 +1,5 @@
+// Description: Revenue card for the dashboard.
+
 'use client'
 
 import LineChart01 from '@/components/charts/line-chart-01'

@@ -1,3 +1,5 @@
+// Description: The Map page of the dashboard.
+
 'use client';
 
 import React from 'react';

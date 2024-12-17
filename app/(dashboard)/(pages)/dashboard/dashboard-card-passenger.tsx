@@ -1,7 +1,8 @@
+// Description: Active passengers card for the dashboard.
 "use client";
 
 import { useState, useEffect } from "react";
-import RealtimeChart from "@/components/charts/realtime-chart2";
+import RealtimeChart from "@/components/charts/realtime-chart-passengers";
 import { chartAreaGradient } from "@/components/charts/chartjs-config";
 import { tailwindConfig, hexToRGB } from "@/components/utils/utils";
 

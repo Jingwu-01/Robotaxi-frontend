@@ -1,20 +1,16 @@
+// Description: The parameters page of the dashboard.
+
 "use client";
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 
 export default function Parameters() {
   const [currentData, setCurrentData] = useState({
-    // simulationTime: "",
-    // timeStep: "",
-    // electricityRate: "",
     robotaxiCount: "",
     chargingStationCount: "",
     peopleCount: "",
   });
 
   const [formData, setFormData] = useState({
-    // simulationTime: "",
-    // timeStep: "",
-    // electricityRate: "",
     robotaxiCount: "",
     chargingStationCount: "",
     peopleCount: "",

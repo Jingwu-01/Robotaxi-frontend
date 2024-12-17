@@ -1,3 +1,5 @@
+// Description: Default layout for dashboard pages.
+
 import Sidebar from "@/components/dashboard-page-components/sidebar";
 import Theme from "../../theme-provider";
 

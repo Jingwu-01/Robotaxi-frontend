@@ -1,3 +1,4 @@
+// Description: Cost card for the dashboard.
 "use client";
 
 import { useState, useEffect } from "react";
