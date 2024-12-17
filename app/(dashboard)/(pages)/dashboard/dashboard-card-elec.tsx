@@ -1,11 +1,9 @@
-// Description: Electricity consumption card for the dashboard.
-
 'use client'
 
-import { useState, useEffect } from "react";
-import RealtimeChart from "@/components/charts/realtime-chart-elec";
-import { chartAreaGradient } from "@/components/charts/chartjs-config";
-import { tailwindConfig, hexToRGB } from "@/components/utils/utils";
+import { useState, useEffect } from "react"
+import RealtimeChart from "@/components/charts/realtime-chart-elec"
+import { chartAreaGradient } from "@/components/charts/chartjs-config"
+import { tailwindConfig, hexToRGB } from "@/components/utils/utils"
 
 interface ConsumptionData {
   [key: string]: number;
@@ -18,7 +16,7 @@ interface ElectricityConsumptionResponse {
 
 export default function DashboardCard_Elec() {
   const [chartData, setChartData] = useState<number[]>([]);
-  const [labels, setLabels] = useState<Date[]>([]);
+  const [simulationTimes, setSimulationTimes] = useState<number[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,17 +26,23 @@ export default function DashboardCard_Elec() {
 
         if (data.status === "success") {
           const consumptionData = data.data;
+          const simulationTime = consumptionData.time; // Get the simulation time from the response
+
+          // Remove 'time' key from consumptionData to just sum taxis' consumption
+          const { time, ...taxisConsumption } = consumptionData;
 
           // Sum the electricity consumption of all vehicles
-          const totalConsumption = Object.values(consumptionData).reduce(
+          const totalConsumption = Object.values(taxisConsumption).reduce(
             (sum, value) => sum + value,
             0
           );
 
-          const totalConsumptionKJ = parseFloat((totalConsumption).toFixed(2));
+          const totalConsumptionWh = parseFloat(totalConsumption.toFixed(2));
 
-          setChartData((prevData) => [...prevData.slice(-49), totalConsumptionKJ]);
-          setLabels((prevLabels) => [...prevLabels.slice(-49), new Date()]);
+          setChartData((prevData) => [...prevData.slice(-49), totalConsumptionWh]);
+          // Instead of a Date object, store the numeric simulationTime
+          setSimulationTimes((prevTimes) => [...prevTimes.slice(-49), simulationTime]);
+
         } else {
           console.error("Error fetching data:", data.status);
         }
@@ -49,16 +53,12 @@ export default function DashboardCard_Elec() {
 
     fetchData();
     const interval = setInterval(fetchData, 1000); 
-
     return () => clearInterval(interval); 
   }, []);
 
-  const formattedLabels = labels.map((date) =>
-    date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
-  );
-
+  // Use simulationTimes directly as labels on the x-axis
   const data = {
-    labels: formattedLabels,
+    labels: simulationTimes, // Array of numbers representing simulation time
     datasets: [
       {
         data: chartData,
@@ -99,9 +99,9 @@ export default function DashboardCard_Elec() {
   return (
     <div className="flex flex-col col-span-full sm:col-span-6 bg-gray-800 shadow-sm rounded-xl">
       <header className="px-5 py-4 border-gray-700/60 flex items-center">
-        <h2 className="font-semibold text-gray-100">Cumumlative Electricity Consumption</h2>
+        <h2 className="font-semibold text-gray-100">Cumulative Electricity Consumption</h2>
       </header>
-      <RealtimeChart data={data}  width={550} height={250} />
+      <RealtimeChart data={data} width={550} height={250} />
     </div>
   );
 }

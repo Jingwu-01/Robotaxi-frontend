@@ -102,9 +102,9 @@ export default function AnalyticsCard05() {
           </div>
 
           <div className="grow">
-            <ul className="flex justify-between text-xs uppercase text-gray-500 font-semibold px-2 space-x-2">
+            <ul className="flex justify-between text-xs text-gray-500 font-semibold px-2 space-x-2">
               <li>Vehicle ID</li>
-              <li>Electricity Consumption (J)</li>
+              <li>Electricity Consumption (Wh)</li>
             </ul>
 
             <ul className="space-y-1 text-sm text-gray-100 mt-3 mb-4">
@@ -127,7 +127,7 @@ export default function AnalyticsCard05() {
                     ></div>
                     <div className="relative flex justify-between space-x-2">
                       <div>{vehicle.id}</div>
-                      <div className="font-medium">{consumptionRounded} J</div>
+                      <div className="font-medium">{consumptionRounded} Wh</div>
                     </div>
                   </li>
                 );
