@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import LineChart01 from "@/components/charts/line-chart-01";
+import LineChart01 from "@/components/charts/line-chart-finantial-metrics";
 import { chartAreaGradient } from "@/components/charts/chartjs-config";
 import { tailwindConfig, hexToRGB } from "@/components/utils/utils";
 
