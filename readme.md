@@ -20,11 +20,30 @@
 If everything is configured correctly, you should be able to interact with the application through the web interface.
 
 ## Project Structure
+```bash
 my-app/
 ├── app/
 │   ├── (dashboard)/
 │   │   ├── (pages)/
-│   │   │   ├── analytics/                                  # Analytics components
+│   │   │   ├── analytics/                                 
+│   │   │   │   ├── analytics-card-battery-max.tsx          # Component for max battery level
+│   │   │   │   ├── analytics-card-battery-mean.tsx         # Component for meann battery level
+│   │   │   │   ├── analytics-card-battery-min.tsx          # Component for min battery level
+│   │   │   │   ├── analytics-card-battery-rank.tsx         # Component for battery levels rank
+│   │   │   │   ├── analytics-card-battery-sd.tsx           # Component for sd battery level
+│   │   │   │   ├── analytics-card-charger-utilization-rate.tsx   # Component for charger utilization rate
+│   │   │   │   ├── analytics-card-dissatisfaction-rate.tsx       # Component for passenger dissatisfaction rate
+│   │   │   │   ├── analytics-card-elec-max.tsx             # Component for max elec consumption
+│   │   │   │   ├── analytics-card-elec-mean.tsx            # Component for meann elec consumption
+│   │   │   │   ├── analytics-card-elec-min.tsx             # Component for min elec consumption
+│   │   │   │   ├── analytics-card-elec-rank.tsx            # Component for elec consumption rank
+│   │   │   │   ├── analytics-card-elec-sd.tsx              # Component for sd elec consumption
+│   │   │   │   ├── analytics-card-fleet-utilization-rate.tsx     # Component for fleet utilization rate
+│   │   │   │   ├── analytics-card-waiting-time.tsx         # Component for average waiting time
+│   │   │   │   ├── util-battery-fetch.tsx                  # Fetch battery level
+│   │   │   │   ├── util-elec-fetch.tsx                     # Fetch elec consumption 
+│   │   │   │   ├── util-statistics.tsx                     # Calculates max/min/mean/sd
+│   │   │   │   ├── page.tsx                                # Analytics component
 │   │   │   ├── dashboard/
 │   │   │   │   ├── dashboard-card-charger.tsx              # Component for active charger card
 │   │   │   │   ├── dashboard-card-cost.tsx                 # Component for cost card
@@ -97,10 +116,11 @@ my-app/
 │   └── doc/                  
 │       └── final-report.pdf                                # Final project report
 ├── test/
-│   ├── test-dashboard.js                                   # Scalibility test for the dashboard
+│   └── test-dashboard.js                                   # Scalibility test for the dashboard
 ├── .gitignore                                              # Git ignore configuration
 ├── next.config.js                                          # Next.js configuration
 ├── package.json                                            # Project dependencies and scripts
 ├── postcss.config.js                                       # PostCSS configuration
 ├── tailwind.config.js                                      # Tailwind CSS configuration
-├── tsconfig.json                                           # TypeScript configuration
+└── tsconfig.json                                           # TypeScript configuration
+```
