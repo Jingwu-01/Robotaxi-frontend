@@ -44,7 +44,7 @@ export default function PassengerUnsatisfaction() {
       <div className="px-5 py-5">
         <header className="flex justify-between items-start mb-2">
           <h2 className="text-lg font-semibold text-gray-100 mb-2">
-            Passenger Unsatisfaction Percentage
+            Passenger Dissatisfaction Percentage
           </h2>
         </header>
         <div className="flex items-start">
