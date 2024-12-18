@@ -1,3 +1,5 @@
+// Description: A card component that displays the battery levels of vehicles in ascending order.
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -10,6 +12,7 @@ export default function BatteryLevelsRank() {
   const [numVehiclesToShow, setNumVehiclesToShow] = useState<number>(10);
   const [inputValue, setInputValue] = useState<string>("10");
 
+  // Fetch battery levels from the server
   useEffect(() => {
     const fetchBatteryLevels = async () => {
       try {

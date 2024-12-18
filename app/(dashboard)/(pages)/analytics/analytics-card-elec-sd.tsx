@@ -1,4 +1,4 @@
-// components/StdDevElectricityConsumption.tsx
+// Description: The Analytics Card for the Standard Deviation of Electricity Consumption.
 "use client";
 
 import { useState, useEffect } from "react";

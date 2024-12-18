@@ -1,3 +1,4 @@
+// Desciption: Mean electricity consumption card for the analytics page.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,6 +8,7 @@ import { computeMean } from "./util-statistics";
 export default function MeanElectricityConsumption() {
   const [meanConsumption, setMeanConsumption] = useState<number>(0);
 
+  // Fetch the electricity consumption data and compute the mean value.
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchElectricityConsumption();

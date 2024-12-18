@@ -1,3 +1,4 @@
+// Description: Electricity Consumption By Category Pie Graph. (Not used in the final project)
 'use client'
 
 import DoughnutChart from '@/components/charts/doughnut-chart'

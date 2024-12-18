@@ -1,3 +1,4 @@
+// Description: The Analytics Card Battery Mean component in the Analytics page.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,6 +8,7 @@ import { computeMean } from "./util-statistics";
 export default function MeanBatteryLevel() {
   const [meanBatteryLevel, setMeanBatteryLevel] = useState<number>(0);
 
+  // Fetch battery levels and compute mean value
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchBatteryLevels();

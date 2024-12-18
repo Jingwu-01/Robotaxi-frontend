@@ -1,4 +1,4 @@
-// components/MaxElectricityConsumption.tsx
+// Description: Max electricity consumption card for the analytics page.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -8,6 +8,7 @@ import { computeMax } from "./util-statistics";
 export default function MaxElectricityConsumption() {
   const [maxConsumption, setMaxConsumption] = useState<number>(0);
 
+  // Fetch data and compute max consumption
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchElectricityConsumption();

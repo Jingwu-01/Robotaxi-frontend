@@ -1,3 +1,5 @@
+// Description: fetch battery levels data from the server.
+
 export interface BatteryLevelsResponse {
     status: string;
     data: {

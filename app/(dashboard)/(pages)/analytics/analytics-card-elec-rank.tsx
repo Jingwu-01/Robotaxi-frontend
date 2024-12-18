@@ -1,3 +1,4 @@
+// Desciption: This file contains the code for the electricity consumption rank card in the analytics dashboard.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -10,6 +11,7 @@ export default function AnalyticsCard05() {
   const [numVehiclesToShow, setNumVehiclesToShow] = useState<number>(10);
   const [inputValue, setInputValue] = useState<string>("10");
 
+  // Fetch electricity consumption data from the server
   useEffect(() => {
     const fetchConsumptionData = async () => {
       try {

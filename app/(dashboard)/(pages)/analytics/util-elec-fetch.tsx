@@ -1,4 +1,4 @@
-// utils/fetchElectricityConsumption.ts
+// Description: Fetch electricity consumption data from the server.
 export interface ElectricityConsumptionResponse {
     status: string;
     data: {

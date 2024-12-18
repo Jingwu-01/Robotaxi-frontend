@@ -1,3 +1,4 @@
+// Description: Analytics card for displaying the standard deviation of the battery level.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,6 +8,7 @@ import { computeStdDev } from "./util-statistics";
 export default function StdDevBatteryLevel() {
   const [stdDevBatteryLevel, setStdDevBatteryLevel] = useState<number>(0);
 
+  // Fetch battery levels from the server and compute the standard deviation
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchBatteryLevels();

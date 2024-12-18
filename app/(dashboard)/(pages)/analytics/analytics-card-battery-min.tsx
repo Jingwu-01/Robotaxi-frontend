@@ -1,3 +1,5 @@
+// Description: The Analytics Card Battery Min component of the Analytics page.
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,6 +9,7 @@ import { computeMin } from "./util-statistics";
 export default function MinBatteryLevel() {
   const [minBatteryLevel, setMinBatteryLevel] = useState<number>(0);
 
+  // Fetch the battery levels and compute the minimum value.
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchBatteryLevels();

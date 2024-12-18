@@ -2,10 +2,10 @@
 
 import AnalyticsCardConsumption from './analytics-card-elec-pie-graph'
 import AnalyticsCardConsumptionRank from './analytics-card-elec-rank'
-import AnalyticsMax from "./analytics-card-elec-max"
-import AnalyticsMin from "./analytics-card-elec-min"
-import AnalyticsMean from "./analytics-card-elec-mean"
-import AnalyticsSd from "./analytics-card-elec-sd"
+import AnalyticsElecMax from "./analytics-card-elec-max"
+import AnalyticsElecMin from "./analytics-card-elec-min"
+import AnalyticsElecMean from "./analytics-card-elec-mean"
+import AnalyticsElecSd from "./analytics-card-elec-sd"
 import AnalyticsWaiting from "./analytics-card-waiting-time"
 import AnalyticsBatteryLevels from "./analytics-card-battery-rank"
 import AnalyticsBatteryMax from './analytics-card-battery-max'
@@ -14,7 +14,7 @@ import AnalyticsBatteryMean from './analytics-card-battery-mean'
 import AnalyticsBatterySd from './analytics-card-battery-sd'
 import AnalyticsFleet from './analytics-card-fleet-utilization-rate'
 import AnalyticsChargerUtilziation from './analytics-card-charger-utilization-rate'
-import AnalyticsUnsatisfactionRate from './analytics-card-unsatisfaction-rate'
+import AnalyticsUnsatisfactionRate from './analytics-card-dissatisfaction-rate'
 
 export default function Analytics() {
   return (
@@ -27,10 +27,10 @@ export default function Analytics() {
       {/* Cards */}
       <div className="grid grid-cols-12 gap-6 mt-10">
       <AnalyticsCardConsumptionRank />
-        <AnalyticsMax />
-        <AnalyticsMin />
-        <AnalyticsMean />
-        <AnalyticsSd />
+        <AnalyticsElecMax />
+        <AnalyticsElecMin />
+        <AnalyticsElecMean />
+        <AnalyticsElecSd />
 
         <AnalyticsBatteryLevels />
         <AnalyticsBatteryMax />
@@ -43,7 +43,6 @@ export default function Analytics() {
         <AnalyticsWaiting />
         <AnalyticsUnsatisfactionRate />
         
-       
       </div>
     </div>
   )

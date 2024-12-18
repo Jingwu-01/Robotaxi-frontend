@@ -1,3 +1,5 @@
+// Description: This file defines the utility functions for statistics, such as mean, max, min, and standard deviation.
+
 export const computeMax = (data: number[]): number => {
     return Math.max(...data);
   };

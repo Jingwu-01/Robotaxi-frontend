@@ -1,3 +1,5 @@
+// Description: A card that displays the percentage of passenger dissatisfaction, defined as the percentage of passengers who have been waiting for more than 15 minutes.
+
 "use client";
 
 import { useState, useEffect } from "react";

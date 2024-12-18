@@ -1,4 +1,4 @@
-// components/MinElectricityConsumption.tsx
+// Description: The Analytics Card for the minimum electricity consumption.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -8,6 +8,7 @@ import { computeMin } from "./util-statistics";
 export default function MinElectricityConsumption() {
   const [minConsumption, setMinConsumption] = useState<number>(0);
 
+  // Fetch the electricity consumption data and compute the minimum value
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchElectricityConsumption();

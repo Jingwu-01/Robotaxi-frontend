@@ -1,7 +1,7 @@
+// Description: A card component that displays the average waiting time of passengers.
 "use client";
 
 import { useState, useEffect } from "react";
-import LineChart01 from "@/components/charts/line-chart-01"; // Adjust the import path as needed
 
 export default function AverageWaitTimeChart() {
   const [averageWaitTimes, setAverageWaitTimes] = useState<number[]>([]);

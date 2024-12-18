@@ -1,3 +1,5 @@
+// Description: A card that displays the charger utilization rate.
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -12,6 +14,7 @@ interface ActiveChargersResponse {
 export default function ChargerUtilization() {
   const [rate, setRate] = useState<number>(0);
 
+  // Fetch the number of active chargers and the total number of chargers
   useEffect(() => {
     const fetchData = async () => {
       try {

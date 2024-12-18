@@ -1,3 +1,4 @@
+// Description: The Analytics Card Battery Max component in the Analytics page.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -7,11 +8,12 @@ import { computeMax } from "./util-statistics";
 export default function MaxBatteryLevel() {
   const [maxBatteryLevel, setMaxBatteryLevel] = useState<number>(0);
 
+  // Fetch battery levels and compute the max value
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchBatteryLevels();
       const maxValue = computeMax(data);
-      setMaxBatteryLevel(Number(maxValue.toFixed(2))); // Round to two decimal places
+      setMaxBatteryLevel(Number(maxValue.toFixed(2))); 
     };
 
     fetchData();

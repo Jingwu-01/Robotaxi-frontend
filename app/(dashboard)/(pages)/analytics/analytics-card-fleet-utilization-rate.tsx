@@ -1,3 +1,5 @@
+// Description: Analytics card for fleet utilization rate, defined as the percentage of vehicles in use at a given time.
+
 "use client";
 
 export default function fleetUtilization() {
