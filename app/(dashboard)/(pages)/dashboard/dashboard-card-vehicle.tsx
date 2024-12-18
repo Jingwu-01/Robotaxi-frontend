@@ -21,6 +21,7 @@ export default function DashboardCard_Vehicles() {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:5000/taxisWithPassengers");
+
         const data: TaxisWithPassengersResponse = await response.json();
         if (data.status === "success") {
           const taxisWithPassengersCount = data.data.taxis_with_passengers;

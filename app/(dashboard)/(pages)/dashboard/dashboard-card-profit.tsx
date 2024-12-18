@@ -12,7 +12,7 @@ interface ProfitResponse {
   };
 }
 
-export default function DashboardCard_Profit() {
+export default function DashboardCard_Profit( ) {
   const [currentProfit, setCurrentProfit] = useState<number>(0);
   const [labels, setLabels] = useState<Date[]>([]);
   const [chartData, setChartData] = useState<number[]>([]);
@@ -20,7 +20,8 @@ export default function DashboardCard_Profit() {
   useEffect(() => {
     const fetchProfit = async () => {
       try {
-        const response = await fetch("http://localhost:5000/profit");
+      const response = await fetch("http://localhost:5000/profit");
+
         const data: ProfitResponse = await response.json();
 
         if (data.status === "success") {

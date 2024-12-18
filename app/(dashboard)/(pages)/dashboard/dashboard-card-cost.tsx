@@ -21,6 +21,7 @@ export default function DashboardCard_Cost() {
     const fetchCost = async () => {
       try {
         const response = await fetch("http://localhost:5000/cost");
+
         const data: CostResponse = await response.json();
 
         if (data.status === "success") {

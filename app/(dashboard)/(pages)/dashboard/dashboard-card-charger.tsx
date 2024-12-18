@@ -21,6 +21,7 @@ export default function DashboardCard_Chargers() {
     const fetchData = async () => {
       try {
         const response = await fetch("http://localhost:5000/activeChargers");
+  
         const data: ActiveChargersResponse = await response.json();
         if (data.status === "success") {
           const activeChargersCount = data.data.active_chargers;

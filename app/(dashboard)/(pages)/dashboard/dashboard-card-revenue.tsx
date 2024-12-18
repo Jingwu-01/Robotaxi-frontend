@@ -12,7 +12,7 @@ interface EarningsResponse {
   };
 }
 
-export default function DashboardCard_Earnings() {
+export default function DashboardCard_Earnings(  ) {
   const [currentEarnings, setCurrentEarnings] = useState<number>(0);
   const [labels, setLabels] = useState<Date[]>([]);
   const [chartData, setChartData] = useState<number[]>([]);
@@ -20,7 +20,9 @@ export default function DashboardCard_Earnings() {
   useEffect(() => {
     const fetchEarnings = async () => {
       try {
-        const response = await fetch("http://localhost:5000/earnings");
+         const response = await fetch("http://localhost:5000/earnings");
+
+      
         const data: EarningsResponse = await response.json();
 
         if (data.status === "success") {
