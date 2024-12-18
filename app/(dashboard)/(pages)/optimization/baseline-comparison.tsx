@@ -1,3 +1,4 @@
+// Description: Comparision between the optimized and baseline data. Not included in the dashboard becuase the backend does not support parallel running of the two modes.
 'use client'
 
 import LineChart03 from '@/components/charts/line-chart-03'

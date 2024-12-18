@@ -1,3 +1,4 @@
+// Description: Real-time chart component for electricity consumption.
 'use client'
 
 import { useRef, useState, useEffect } from 'react'

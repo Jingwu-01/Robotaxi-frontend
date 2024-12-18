@@ -1,3 +1,5 @@
+// test the dashboard page with different sizes of data
+
 const puppeteer = require('puppeteer');
 
 (async () => {

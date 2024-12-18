@@ -1,3 +1,5 @@
+// Description: real-time chart component for active chargers.
+
 'use client'
 
 import { useRef, useState, useEffect } from 'react'

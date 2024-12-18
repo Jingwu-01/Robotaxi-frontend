@@ -4,12 +4,14 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from "react";
 
 export default function Parameters() {
+  // Initialize state variables
   const [currentData, setCurrentData] = useState({
     robotaxiCount: "",
     chargingStationCount: "",
     peopleCount: "",
   });
 
+  // Initialize form data
   const [formData, setFormData] = useState({
     robotaxiCount: "",
     chargingStationCount: "",
@@ -21,19 +23,22 @@ export default function Parameters() {
 
   useEffect(() => {
     const fetchParameters = async () => {
+      // Fetch current parameters from the server
       try {
         const response = await fetch("http://localhost:5000/status");
         const result = await response.json();
         if (!response.ok) {
           throw new Error(result.message || "Failed to fetch parameters");
         }
-  
+        
+        // Update current data and form data
         setCurrentData({
           robotaxiCount: result.data.num_taxis_in_sim.toString(),
           chargingStationCount: result.data.num_active_chargers.toString(),
           peopleCount: result.data.num_people_in_sim.toString(),
         });
-  
+        
+        // Update form data
         setFormData({
           robotaxiCount: result.data.num_taxis_in_sim.toString(),
           chargingStationCount: result.data.num_active_chargers.toString(),
@@ -43,9 +48,11 @@ export default function Parameters() {
         setError(err.message);
       }
     };
+    // Fetch parameters on component mount
     fetchParameters();
   }, []);
   
+  // Handle form input change
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -54,15 +61,18 @@ export default function Parameters() {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
     setMessage(null);
-  
+    
+    // Parse form data
     const desiredCars = parseInt(formData.robotaxiCount);
     const desiredChargers = parseInt(formData.chargingStationCount);
     const desiredPeople = parseInt(formData.peopleCount);
-  
+    
+    // Validate input
     if (
       isNaN(desiredCars) ||
       isNaN(desiredChargers) ||
@@ -74,7 +84,8 @@ export default function Parameters() {
       setError("Please enter valid positive numbers for all fields.");
       return;
     }
-  
+    
+    // Prepare updates
     const updates = [];
   
     // Determine changes for robotaxis
@@ -124,7 +135,8 @@ export default function Parameters() {
         body: JSON.stringify({ num_people: currentPeople - desiredPeople }),
       }));
     }
-  
+    
+    // Update parameters
     try {
       const responses = await Promise.all(updates);
       for (const response of responses) {
@@ -133,7 +145,8 @@ export default function Parameters() {
           throw new Error(result.message || "Failed to update parameters");
         }
       }
-  
+      
+      // Update current data
       setCurrentData({
         robotaxiCount: desiredCars.toString(),
         chargingStationCount: desiredChargers.toString(),

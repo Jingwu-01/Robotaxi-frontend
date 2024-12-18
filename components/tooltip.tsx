@@ -1,3 +1,5 @@
+// Description: Tooltip component for displaying additional information.
+
 import { useState } from 'react'
 import { Transition } from '@headlessui/react'
 

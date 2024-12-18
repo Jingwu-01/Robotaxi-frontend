@@ -1,3 +1,5 @@
+// Description: initialization page of the app.
+
 "use client";
 
 import { useState, ChangeEvent, FormEvent } from "react";
@@ -31,6 +33,7 @@ export default function Init() {
 
   const router = useRouter();
 
+  // Handle form input change
   const handleChange = (
     event: ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -41,6 +44,7 @@ export default function Init() {
     }));
   };
 
+  // Handle form submission
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setError(null);
@@ -59,13 +63,13 @@ export default function Init() {
     }
 
     const payload = {
-      step_length: parseFloat(formData.timeStep),
-      sim_start_time: simStart,
-      sim_end_time: simEnd,
-      num_taxis: parseInt(formData.robotaxiCount, 10),
-      num_chargers: parseInt(formData.chargingStationCount, 10),
-      num_people: parseInt(formData.peopleCount, 10),
-      optimized: mode === "Optimized",
+      step_length: parseFloat(formData.timeStep), // time step
+      sim_start_time: simStart, // simulation start time
+      sim_end_time: simEnd, //  simulation end time
+      num_taxis: parseInt(formData.robotaxiCount, 10), // number of robotaxis
+      num_chargers: parseInt(formData.chargingStationCount, 10), // number of charging stations
+      num_people: parseInt(formData.peopleCount, 10), // number of passengers
+      optimized: mode === "Optimized", // optimized mode
     };
 
     try {

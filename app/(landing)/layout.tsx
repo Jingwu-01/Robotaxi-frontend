@@ -1,3 +1,5 @@
+// Description: Default layout for the landing page.
+
 "use client";
 
 import { useEffect } from "react";

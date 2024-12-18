@@ -1,3 +1,5 @@
+// Description: real-time chart component for active passengers.
+
 "use client";
 
 import { useRef, useState, useEffect } from "react";

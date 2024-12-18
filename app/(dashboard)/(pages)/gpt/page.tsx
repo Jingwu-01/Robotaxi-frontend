@@ -14,10 +14,12 @@ export default function GPT() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Handle textarea change
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>): void => {
     setMessage(event.target.value);
   };
 
+  // Handle form submission
   const handleSubmit = async (
     event: FormEvent<HTMLFormElement>
   ): Promise<void> => {
@@ -36,6 +38,7 @@ export default function GPT() {
     setIsLoading(true);
     setError(null);
 
+    // Send message to the Robotaxi GPT API
     try {
       const res: Response = await fetch("http://localhost:5001/", {
         method: "POST",

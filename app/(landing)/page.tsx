@@ -1,3 +1,4 @@
+// Description: Landing page component.
 import Background from "@/components/landing-page-components/background";
 import Title from "@/components/landing-page-components/title";
 import Features from "@/components/landing-page-components/features";
