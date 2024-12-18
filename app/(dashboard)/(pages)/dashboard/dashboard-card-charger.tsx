@@ -1,3 +1,5 @@
+// Description: A card component that displays a real-time chart of the number of chargers being used.
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -17,6 +19,7 @@ export default function DashboardCard_Chargers() {
   const [chartData, setChartData] = useState<number[]>([]);
   const [simulationTimes, setSimulationTimes] = useState<number[]>([]);
 
+  // Fetch active charger data from server every second
   useEffect(() => {
     const fetchData = async () => {
       try {

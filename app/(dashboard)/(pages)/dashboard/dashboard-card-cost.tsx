@@ -1,3 +1,4 @@
+// Description: Cost card for the dashboard page.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -17,6 +18,7 @@ export default function DashboardCard_Cost() {
   const [labels, setLabels] = useState<Date[]>([]);
   const [chartData, setChartData] = useState<number[]>([]);
 
+  // Fetch cost data every second
   useEffect(() => {
     const fetchCost = async () => {
       try {

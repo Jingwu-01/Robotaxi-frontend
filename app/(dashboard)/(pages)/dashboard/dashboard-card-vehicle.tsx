@@ -1,3 +1,4 @@
+// Description: The dashboard card for the vehicles with passengers chart.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -17,6 +18,7 @@ export default function DashboardCard_Vehicles() {
   const [chartData, setChartData] = useState<number[]>([]);
   const [simulationTimes, setSimulationTimes] = useState<number[]>([]);
 
+  // Fetch occupied taxis data from the backend every second
   useEffect(() => {
     const fetchData = async () => {
       try {

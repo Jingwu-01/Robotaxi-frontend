@@ -1,3 +1,4 @@
+// Description: electricity consumption card for the dashboard page.
 'use client'
 
 import { useState, useEffect } from "react"
@@ -18,6 +19,7 @@ export default function DashboardCard_Elec() {
   const [chartData, setChartData] = useState<number[]>([]);
   const [simulationTimes, setSimulationTimes] = useState<number[]>([]);
 
+  // Fetch electricity consumption data from the server
   useEffect(() => {
     const fetchData = async () => {
       try {

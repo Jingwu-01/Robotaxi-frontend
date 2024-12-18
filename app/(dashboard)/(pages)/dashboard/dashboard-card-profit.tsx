@@ -1,3 +1,4 @@
+// Description: Profit card for the dashboard page.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -17,6 +18,7 @@ export default function DashboardCard_Profit( ) {
   const [labels, setLabels] = useState<Date[]>([]);
   const [chartData, setChartData] = useState<number[]>([]);
 
+  // Fetch profit data every second
   useEffect(() => {
     const fetchProfit = async () => {
       try {

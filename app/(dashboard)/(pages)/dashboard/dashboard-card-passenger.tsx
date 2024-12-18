@@ -1,3 +1,5 @@
+// Description: active passenger card component for the dashboard page.
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -9,7 +11,7 @@ interface ActivePassengersResponse {
   status: string;
   data: {
     active_passengers: number;
-    time: number; // Ensure backend returns this
+    time: number; 
   };
 }
 
@@ -17,6 +19,7 @@ export default function DashboardCard_Passengers() {
   const [chartData, setChartData] = useState<number[]>([]);
   const [simulationTimes, setSimulationTimes] = useState<number[]>([]);
 
+  // Fetch active passenger data from the server
   useEffect(() => {
     const fetchData = async () => {
       try {

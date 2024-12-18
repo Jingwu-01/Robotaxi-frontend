@@ -1,3 +1,4 @@
+// Description: Revenue card for the dashboard page.
 "use client";
 
 import { useState, useEffect } from "react";
@@ -17,6 +18,7 @@ export default function DashboardCard_Earnings(  ) {
   const [labels, setLabels] = useState<Date[]>([]);
   const [chartData, setChartData] = useState<number[]>([]);
 
+  // Fetch earnings data every second
   useEffect(() => {
     const fetchEarnings = async () => {
       try {
